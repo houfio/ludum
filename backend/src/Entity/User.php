@@ -40,37 +40,37 @@ class User implements JsonSerializable
     public $password;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=16, nullable=true)
      */
     public $phone_number;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $team;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=16, nullable=true)
      */
     public $zip_code;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=16, nullable=true)
      */
     public $house_number;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     public $birth_date;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    public $receive_newsletter;
+    public $receive_newsletter = true;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     public $avatar;
 
@@ -82,7 +82,7 @@ class User implements JsonSerializable
     /**
      * @@ORM\Column(type="float")
      */
-    public $balance;
+    public $balance = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="user")
@@ -137,12 +137,11 @@ class User implements JsonSerializable
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'password' => $this->password,
             'phone_number' => $this->phone_number,
             'team' => $this->team,
             'zip_code' => $this->zip_code,
             'house_number' => $this->house_number,
-            'birth_date' => $this->birth_date->format('Y-m-d'),
+            'birth_date' => isset($this->birth_date) ? $this->birth_date->format('Y-m-d') : null,
             'receive_newsletter' => $this->receive_newsletter,
             'avatar' => $this->avatar,
             'creation_date' => $this->creation_date->format('Y-m-d H:i'),

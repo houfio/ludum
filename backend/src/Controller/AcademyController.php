@@ -1,8 +1,10 @@
 <?php
 namespace Ludum\Controller;
 
-use ludum\Core\Controller;
-use ludum\Core\RouteSet;
+use League\Route\Http\Exception\NotFoundException;
+use Ludum\Core\Controller;
+use Ludum\Core\RouteSet;
+use Ludum\Entity\Academy;
 
 class AcademyController extends Controller
 {
@@ -14,8 +16,12 @@ class AcademyController extends Controller
 
     public function getAcademy(array $args, array $vars)
     {
-        $academyRepo = $this->getEntityManager()->getRepository('ludum\Entity\Academy');
+        $academyRepo = $this->getEntityManager()->getRepository(Academy::class);
         $academy = $academyRepo->findOneBy(['id' => $vars['id']]);
+
+        if (!$academy) {
+            throw new NotFoundException();
+        }
 
         return $academy;
     }

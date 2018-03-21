@@ -31,13 +31,8 @@ class ArgumentStrategy implements StrategyInterface
             $config = $this->container->get('config');
             /** @var RouteSet $routeSet */
             $routeSet = $this->container->get(get_class($callable[0]) . '\routeSet');
-            $path = substr($request->getUri()->getPath(), strlen($config['prefix']));
 
-            if (empty($path)) {
-                $path = '/';
-            }
-
-            $route = $routeSet->getRouteForPath($path);
+            $route = $routeSet->getRouteForPath(substr($route->getPath(), strlen($config['prefix'])));
             $args = array_intersect_key(json_decode(file_get_contents('php://input'), true) ?? [], $route['args']);
             $validator = new Validator($args);
 

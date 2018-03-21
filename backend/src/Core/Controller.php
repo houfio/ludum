@@ -29,7 +29,7 @@ abstract class Controller implements ContainerAwareInterface, RequestAwareInterf
         /** @var AccessToken $login */
         $login = $login_repo->findOneBy(['token' => $this->getRequest()->getHeader('Authorization')]);
 
-        if (!$login || !$login->active || !$login->user->approved) {
+        if (!$login || !$login->active) {
             throw new UnauthorizedException();
         }
 

@@ -19,16 +19,11 @@ class UserController extends Controller
         return RouteSet::create()
             ->get('user', '/user', 'getUser', true)
             ->post('user_register', '/user/register', 'postRegister', false, [
-                'membership_id' => ['required', 'integer'],
-                'membership_section' => ['required'],
-                'password' => ['required', 'lengthMin' => [8]],
                 'first_name' => ['required'],
                 'last_name' => ['required'],
                 'email' => ['required', 'email'],
-                'phone_number' => ['required', 'regex' => [static::PHONE_NUMBER_REGEX]],
-                'zip_code' => ['required', 'regex' => [static::ZIP_CODE_REGEX]],
-                'house_number' => ['required', 'regex' => [static::HOUSE_NUMBER_REGEX]],
-                'birth_date' => ['required', 'date']
+                'password' => ['required', 'lengthMin' => [8]],
+                'phone_number' => ['regex' => [static::PHONE_NUMBER_REGEX]]
             ])
             ->post('user_login', '/user/login', 'postLogin', false, [
                 'email' => ['required', 'email'],
@@ -63,14 +58,14 @@ class UserController extends Controller
         }
 
         $user = new User();
-        $user->password = password_hash($args['password'], PASSWORD_BCRYPT);
         $user->first_name = $args['first_name'];
         $user->last_name = $args['last_name'];
         $user->email = $args['email'];
-        $user->phone_number = $args['phone_number'];
-        $user->zip_code = $args['zip_code'];
-        $user->house_number = $args['house_number'];
-        $user->birth_date = DateTime::createFromFormat('Y-m-d', $args['birth_date']);
+        $user->password = password_hash($args['password'], PASSWORD_BCRYPT);
+
+        if (isset($args['phone_number'])) {
+            $user->phone_number = $args['phone_number'];
+        }
 
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
