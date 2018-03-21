@@ -1,6 +1,6 @@
 <?php
 return [
     'debug' => true,
-    'database_user' => 'matthijs',
-    'database_password' => 'test'
+    'database_user' => 'postgres',
+    'database_password' => 'postgres'
 ];

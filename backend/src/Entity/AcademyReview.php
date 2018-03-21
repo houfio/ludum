@@ -26,6 +26,11 @@ class AcademyReview implements JsonSerializable
     public $stars;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     */
+    public $title;
+
+    /**
      * @ORM\Column(type="text")
      */
     public $review;
@@ -55,6 +60,7 @@ class AcademyReview implements JsonSerializable
         return [
             'id' => $this->id,
             'stars' => $this->stars,
+            'title' => $this->title,
             'review' => $this->review,
             'creation_date' => $this->creation_date->format('Y-m-d H:i')
         ];
