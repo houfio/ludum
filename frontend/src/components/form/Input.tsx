@@ -11,8 +11,7 @@ export const Input = ({ styles = [], ...props }) => {
       border: 'none',
       borderRadius: '2rem',
       '::placeholder': {
-        fontWeight: 600,
-        textAlign: 'center'
+        fontWeight: 600
       }
     }
   });

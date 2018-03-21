@@ -7,16 +7,24 @@ import { withProps } from '../utils/withProps';
 import { Hero } from '../components/Hero';
 import { Heading } from '../components/Heading';
 import { Input } from '../components/form/Input';
-import { Button } from '../components/Button';
+import { Button } from '../components/form/Button';
 import { Container } from '../components/Container';
 import { forBreakpoint } from '../utils/forBreakpoint';
 import { TABLET_LANDSCAPE } from '../constants';
+import { auth } from '../modules/auth';
+
+type Form = {
+  email: string,
+  password: string
+}
 
 const { props, connect } = withProps<{}, InjectedFormProps>()();
 
-export const Login = connect(reduxForm<{}, typeof props>({
+export const Login = connect(reduxForm<Form, typeof props>({
   form: 'login',
-  onSubmit: values => console.log(values)
+  onSubmit: (values, dispatch) => {
+    dispatch(auth.login({ email: values.email!, password: values.password! }));
+  }
 })(class extends Component<typeof props> {
   public render() {
     const { handleSubmit } = this.props;
@@ -24,6 +32,9 @@ export const Login = connect(reduxForm<{}, typeof props>({
     const styleSheet = StyleSheet.create({
       hero: {
         marginBottom: '10rem'
+      },
+      container: {
+        marginBottom: '4rem'
       },
       form: {
         position: 'relative',
@@ -53,7 +64,7 @@ export const Login = connect(reduxForm<{}, typeof props>({
 
     return (
       <Hero styles={[styleSheet.hero]}>
-        <Container>
+        <Container styles={[styleSheet.container]}>
           <Heading text="inloggen" type="bold" styles={[styleSheet.heading]}/>
           <div>
             I see. So our trusty Phoenix Wright is back with us now, is he?

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CSSProperties } from 'react';
 import { css, StyleSheet } from 'aphrodite/no-important';
 
-import { ButtonTypes } from '../types';
+import { ButtonTypes } from '../../types';
 
 type Props = {
   text: string,

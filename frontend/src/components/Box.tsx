@@ -27,15 +27,19 @@ export const Box = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
       top: '0',
       left: '0',
       width: '100%',
-      height: '100%',
+      height: '100%'
+    },
+    wrapper: {
       padding: '2rem'
     }
   });
 
   return (
-    <Tag className={css(styleSheet.box, styles)}>
+    <Tag className={css(styleSheet.box)}>
       <div className={css(styleSheet.inner)}>
-        {children}
+        <div className={css(styleSheet.wrapper, styles)}>
+          {children}
+        </div>
       </div>
     </Tag>
   );

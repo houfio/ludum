@@ -10,7 +10,7 @@ export const auth = createModule(
   createAction => ({
     login: createAction<{ email: string, password: string }>('LOGIN')(
       payload => ({
-        promise: createApiRequest<Token>('post', '/user/login', payload),
+        promise: createApiRequest<Token>('post', 'user/login', payload),
         queue: 'save'
       }),
       action => {
@@ -24,7 +24,7 @@ export const auth = createModule(
     ),
     logout: createAction<Token>('LOGOUT')(
       payload => ({
-        promise: createApiRequest<Token>('get', '/user/logout', undefined, payload),
+        promise: createApiRequest<Token>('get', 'user/logout', undefined, payload),
         queue: 'save'
       }),
       () => {

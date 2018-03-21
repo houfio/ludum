@@ -6,6 +6,7 @@ import { Logo } from './Logo';
 import { Heading } from './Heading';
 import { withProps } from '../utils/withProps';
 import { State } from '../types';
+import { Input } from './form/Input';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
@@ -55,7 +56,8 @@ export const Footer = connect(class extends Component<typeof props> {
       },
       description: {
         textAlign: 'center',
-        maxWidth: '300px'
+        maxWidth: '300px',
+        marginBottom: '2rem'
       }
     });
 
@@ -64,10 +66,11 @@ export const Footer = connect(class extends Component<typeof props> {
         {location && location.pathname === '/' && (
           <div className={css(styleSheet.section, styleSheet.top)}>
             <div className={css(styleSheet.background, styleSheet.topBackground)}/>
-            <Heading text="Jouw voetbalschool ook op ludum?" type="thin" styles={[styleSheet.heading]}/>
+            <Heading text="Jouw voetbalschool ook op ludum?" type="bold" styles={[styleSheet.heading]}/>
             <div className={css(styleSheet.description)}>
               Wil je jouw voetbalschool ook op ludum? Schrijf je hier in wij nemen contact met je op!
             </div>
+            <Input placeholder="email adres" type="email"/>
           </div>
         )}
         <div className={css(styleSheet.section, styleSheet.bottom)}>
