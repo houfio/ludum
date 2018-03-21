@@ -34,7 +34,7 @@ export const Button = ({ text, type = 'primary', htmlType, onClick, styles = [] 
     button: {
       display: 'inline-block',
       padding: '1.25rem 2.25rem',
-      fontWeight: '500',
+      fontWeight: 600,
       cursor: 'pointer',
       border: 'none',
       borderRadius: '2rem',

@@ -9,6 +9,7 @@ import { State } from '../types';
 import { Home } from '../containers/Home';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
+import { Login } from '../containers/Login';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
@@ -37,6 +38,7 @@ export const Root = connect(class extends Component<typeof props> {
         <main className={css(styleSheet.main)}>
           <Switch location={location || createLocation(window.location.href)}>
             <Route path="/" exact={true} component={Home}/>
+            <Route path="/login" exact={true} component={Login}/>
           </Switch>
         </main>
         <Footer/>

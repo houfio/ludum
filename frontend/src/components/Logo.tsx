@@ -24,7 +24,7 @@ export const Logo = connect(class extends Component<typeof props> {
     const styleSheet = StyleSheet.create({
       logo: {
         fontSize: '3rem',
-        fontWeight: 500,
+        fontWeight: 600,
         color: '#FFFFFF',
         cursor: 'pointer',
         lineHeight: '1'

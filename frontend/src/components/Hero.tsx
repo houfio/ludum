@@ -13,7 +13,8 @@ export const Hero = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
     hero: {
       position: 'relative',
       display: 'flex',
-      justifyContent: 'center',
+      flexDirection: 'column',
+      alignItems: 'center',
       padding: '9rem 0 16rem 0',
       color: '#FFFFFF'
     },
