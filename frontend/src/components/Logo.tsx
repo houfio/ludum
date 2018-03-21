@@ -1,22 +1,38 @@
 import * as React from 'react';
+import { Component, CSSProperties } from 'react';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import { CSSProperties } from 'react';
+import { push } from 'react-router-redux';
+
+import { withProps } from '../utils/withProps';
+import { handle } from '../utils/handle';
 
 type Props = {
   styles?: (CSSProperties | false)[]
 }
 
-export const Logo = ({ styles = [] }: Props) => {
-  const styleSheet = StyleSheet.create({
-    logo: {
-      fontSize: '3rem',
-      fontWeight: 500,
-      color: '#FFFFFF',
-      lineHeight: '1'
-    }
-  });
+const getActionCreators = () => ({
+  push
+});
 
-  return (
-    <span className={css(styleSheet.logo, styles)}>ludum.</span>
-  )
-};
+const { props, connect } = withProps<Props>()(undefined, getActionCreators);
+
+export const Logo = connect(class extends Component<typeof props> {
+  public render() {
+    const { styles = [] } = this.props;
+    const { push } = this.props;
+
+    const styleSheet = StyleSheet.create({
+      logo: {
+        fontSize: '3rem',
+        fontWeight: 500,
+        color: '#FFFFFF',
+        cursor: 'pointer',
+        lineHeight: '1'
+      }
+    });
+
+    return (
+      <span className={css(styleSheet.logo, styles)} onClick={handle(push, '/')}>ludum.</span>
+    )
+  }
+});

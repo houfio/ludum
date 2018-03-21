@@ -7,6 +7,7 @@ import { ButtonTypes } from '../types';
 type Props = {
   text: string,
   type?: ButtonTypes,
+  htmlType?: 'button' | 'submit' | 'reset',
   onClick?: () => void,
   styles?: (CSSProperties | false)[]
 }
@@ -28,13 +29,14 @@ const buttonStyles: { [T in ButtonTypes]: CSSProperties } = {
   }
 };
 
-export const Button = ({ text, type = 'primary', onClick, styles = [] }: Props) => {
+export const Button = ({ text, type = 'primary', htmlType, onClick, styles = [] }: Props) => {
   const styleSheet = StyleSheet.create({
     button: {
       display: 'inline-block',
       padding: '1.25rem 2.25rem',
       fontWeight: '500',
       cursor: 'pointer',
+      border: 'none',
       borderRadius: '2rem',
       transition: 'background-color .2s ease',
       ...buttonStyles[type] as any
@@ -42,6 +44,6 @@ export const Button = ({ text, type = 'primary', onClick, styles = [] }: Props) 
   });
 
   return (
-    <span className={css(styleSheet.button, styles)} onClick={onClick}>{text}</span>
+    <button className={css(styleSheet.button, styles)} onClick={onClick} type={htmlType}>{text}</button>
   );
 };
