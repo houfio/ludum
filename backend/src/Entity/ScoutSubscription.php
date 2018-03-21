@@ -17,7 +17,7 @@ class ScoutSubscription implements JsonSerializable
      * @@ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Rev(targetEntity="Scout")
+     * @ORM\OneToMany(targetEntity="Scout")
      */
     public $id;
 
@@ -39,6 +39,11 @@ class ScoutSubscription implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        // TODO: Implement jsonSerialize() method.
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'price' => $this->price
+        ];
     }
 }

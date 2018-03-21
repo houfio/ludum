@@ -1,4 +1,5 @@
 <?php
+
 namespace Ludum\Entity;
 
 use DateTime;
@@ -23,6 +24,11 @@ class AcademyReview implements JsonSerializable
      * @ORM\Column(type="integer", length=1)
      */
     public $stars;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", mappedBy="id")
+     */
+    public $user;
 
     /**
      * @ORM\Column(type="text")

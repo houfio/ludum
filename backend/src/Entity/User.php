@@ -16,6 +16,12 @@ class User implements JsonSerializable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToOne(targetEntity="Scout")
+     * @ORM\OneToOne(targetEntity="AcademyLike")
+     * @ORM\OneToMany(targetEntity="UserSubscription")
+     * @ORM\OneToMany(targetEntity="Academy")
+     * @ORM\OneToMany(targetEntity="AcademyReview"
+     * @ORM\OneToMany(targetEntity="User", mappedBy="id"
      */
     public $id;
 

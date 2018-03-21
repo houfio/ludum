@@ -20,7 +20,7 @@ class Academy implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", mappedBy="id")
      */
     public $user;
 

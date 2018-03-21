@@ -22,6 +22,7 @@ class UserAgenda
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="User", mappedBy="id"
      */
     public $user;
 
