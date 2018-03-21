@@ -43,7 +43,7 @@ export const Login = connect(reduxForm<{}, typeof props>({
         display: 'none',
         position: 'absolute',
         height: '12rem',
-        left: '-15rem',
+        left: '-20vw',
         top: '-2rem',
         ...forBreakpoint(TABLET_LANDSCAPE, {
           display: 'block'

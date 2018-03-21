@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
 /**
- * @ORM\Table(name="user_agenda")
+ * @ORM\Table(name="user_events")
  * @ORM\Entity
  */
-class UserAgenda
+class UserEvent
 {
     /**
      * @ORM\Column(type="integer")
@@ -21,13 +21,12 @@ class UserAgenda
     public $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
-     */
-    public $user;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="AcademyEvent")
      */
     public $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    public $user;
 }

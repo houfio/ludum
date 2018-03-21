@@ -2,7 +2,6 @@
 
 namespace Ludum\Entity;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
@@ -21,7 +20,7 @@ class AcademyEvent implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Academy")
      */
     public $academy;
 
@@ -35,11 +34,20 @@ class AcademyEvent implements JsonSerializable
      */
     public $date;
 
+    /**
+     * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="event")
+     */
+    public $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
+
     public function jsonSerialize(): array
     {
         return [
             'id' => $this->id,
-            'academy_id' => $this->academy,
             'description' => $this->description,
             'date' => $this->date
         ];

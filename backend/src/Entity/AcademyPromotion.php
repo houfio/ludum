@@ -10,7 +10,7 @@ use JsonSerializable;
  * @ORM\Table(name="promotions")
  * @ORM\Entity
  */
-class Promotions implements JsonSerializable
+class AcademyPromotion implements JsonSerializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -18,6 +18,11 @@ class Promotions implements JsonSerializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     public $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Academy")
+     */
+    public $academy;
 
     /**
      * @ORM\Column(type="datetime")

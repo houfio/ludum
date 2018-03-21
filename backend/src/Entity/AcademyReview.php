@@ -35,6 +35,16 @@ class AcademyReview implements JsonSerializable
      */
     public $creation_date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Academy")
+     */
+    public $academy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    public $user;
+
     public function __construct()
     {
         $this->creation_date = new DateTime('now');

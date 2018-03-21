@@ -4,10 +4,10 @@ namespace Ludum\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="user_subscription")
+ * @ORM\Table(name="academy_admins")
  * @ORM\Entity
  */
-class UserSubscription
+class AcademyAdmin
 {
     /**
      * @ORM\Column(type="integer")
@@ -17,9 +17,9 @@ class UserSubscription
     public $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AcademySubscription")
+     * @ORM\ManyToOne(targetEntity="Academy")
      */
-    public $subscription;
+    public $academy;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")

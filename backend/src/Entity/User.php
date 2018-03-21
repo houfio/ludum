@@ -79,9 +79,55 @@ class User implements JsonSerializable
      */
     public $creation_date;
 
+    /**
+     * @@ORM\Column(type="float")
+     */
+    public $balance;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="user")
+     */
+    public $accessTokens;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyAdmin", mappedBy="user")
+     */
+    public $admins;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyLike", mappedBy="user")
+     */
+    public $likes;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Scout", mappedBy="user")
+     */
+    public $scout;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserSubscription", mappedBy="user")
+     */
+    public $subscriptions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="user")
+     */
+    public $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyReview", mappedBy="user")
+     */
+    public $reviews;
+
     public function __construct()
     {
         $this->creation_date = new DateTime();
+        $this->accessTokens = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->admins = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function jsonSerialize(): array
@@ -100,6 +146,7 @@ class User implements JsonSerializable
             'receive_newsletter' => $this->receive_newsletter,
             'avatar' => $this->avatar,
             'creation_date' => $this->creation_date->format('Y-m-d H:i'),
+            'balance' => $this->balance,
             'access_tokens' => array_filter($this->accessTokens->toArray(), function ($var) {
                 return $var->active;
             })

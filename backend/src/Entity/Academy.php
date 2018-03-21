@@ -49,9 +49,45 @@ class Academy implements JsonSerializable
      */
     public $creation_date;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyAdmin", mappedBy="academy")
+     */
+    public $admins;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyLike", mappedBy="academy")
+     */
+    public $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademySubscription", mappedBy="academy")
+     */
+    public $subscriptions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyEvent", mappedBy="academy")
+     */
+    public $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyPromotion", mappedBy="academy")
+     */
+    public $promotions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyReview", mappedBy="academy")
+     */
+    public $reviews;
+
     public function __construct()
     {
         $this->creation_date = new DateTime('now');
+        $this->admins = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function jsonSerialize(): array

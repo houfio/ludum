@@ -1,12 +1,8 @@
 <?php
-
 namespace Ludum\Entity;
 
-use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
-
 
 /**
  * @ORM\Table(name="scouts")
@@ -22,9 +18,14 @@ class Scout implements JsonSerializable
     public $id;
 
     /**
-     * @@ORM\Column(type="float")
+     * @Orm\OneToOne(targetEntity="User")
      */
-    public $balance;
+    public $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ScoutSubscription")
+     */
+    public $subscription;
 
     /**
      * @@ORM\Column(type="date")
@@ -42,7 +43,6 @@ class Scout implements JsonSerializable
             'id' => $this->id,
             'user' => $this->user,
             'subscription' => $this->subscription,
-            'balance' => $this->balance,
             'creation_date' => $this->creation_date,
             'subscription_end' => $this->subscription_end
         ];
