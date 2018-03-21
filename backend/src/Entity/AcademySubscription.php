@@ -20,11 +20,6 @@ class AcademySubscription implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="User")
-     */
-    public $academy;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     public $title;

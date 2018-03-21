@@ -17,14 +17,4 @@ class UserSubscription
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     public $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", mappedBy="id")
-     */
-    public $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AcademySubscriptions")
-     */
-    public $academy_subscription;
 }

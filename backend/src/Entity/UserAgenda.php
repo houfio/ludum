@@ -22,7 +22,7 @@ class UserAgenda
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="User", mappedBy="id"
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="id")
      */
     public $user;
 

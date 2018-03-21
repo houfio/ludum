@@ -20,14 +20,6 @@ class AcademyLike
      */
     public $id;
 
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\OneToOne(targetEntity="User", mappedBy="id")
-     */
-    public $user;
-
-
     /**
      * @ORM\Column(type="integer")
      */

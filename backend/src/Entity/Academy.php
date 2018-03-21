@@ -20,11 +20,6 @@ class Academy implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", mappedBy="id")
-     */
-    public $user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     public $name;

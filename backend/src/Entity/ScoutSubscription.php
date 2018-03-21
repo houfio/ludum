@@ -17,7 +17,6 @@ class ScoutSubscription implements JsonSerializable
      * @@ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Scout")
      */
     public $id;
 

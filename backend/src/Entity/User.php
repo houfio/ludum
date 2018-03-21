@@ -16,12 +16,6 @@ class User implements JsonSerializable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToOne(targetEntity="Scout")
-     * @ORM\OneToOne(targetEntity="AcademyLike")
-     * @ORM\OneToMany(targetEntity="UserSubscription")
-     * @ORM\OneToMany(targetEntity="Academy")
-     * @ORM\OneToMany(targetEntity="AcademyReview"
-     * @ORM\OneToMany(targetEntity="User", mappedBy="id"
      */
     public $id;
 
@@ -85,27 +79,9 @@ class User implements JsonSerializable
      */
     public $creation_date;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="user")
-     */
-    public $accessTokens;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Academy", mappedBy="user")
-     */
-    public $academy;
-
-    /**
-     * @ORM\OneToMany(targetEntity="UserSubscription", mappedBy="user")
-     */
-    public $user_subscription;
-
     public function __construct()
     {
         $this->creation_date = new DateTime();
-        $this->accessTokens = new ArrayCollection();
-        $this->academy = new ArrayCollection();
-        $this->user_subscription = new ArrayCollection();
     }
 
     public function jsonSerialize(): array

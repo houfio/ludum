@@ -19,11 +19,6 @@ class AccessToken implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
-     */
-    public $user;
-
-    /**
      * @ORM\Column(type="string", length=128, unique=true)
      */
     public $token;

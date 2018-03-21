@@ -21,7 +21,7 @@ class AcademyEvent implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\Column(type="integer"
+     * @ORM\Column(type="integer")
      */
     public $academy;
 

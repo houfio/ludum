@@ -26,11 +26,6 @@ class AcademyReview implements JsonSerializable
     public $stars;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", mappedBy="id")
-     */
-    public $user;
-
-    /**
      * @ORM\Column(type="text")
      */
     public $review;
