@@ -23,6 +23,8 @@ export type Queue = {
 
 export type HeadingTypes = 'bold' | 'thin' | 'subtle';
 
+export type ButtonTypes = 'primary' | 'secondary';
+
 export type ApiResponse<T> = {
   success: boolean,
   data?: T,
