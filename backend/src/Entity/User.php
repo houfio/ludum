@@ -20,21 +20,6 @@ class User implements JsonSerializable
     public $id;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    public $admin = false;
-
-    /**
-     * @ORM\Column(type="string", length=72)
-     */
-    public $password;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    public $creation_date;
-
-    /**
      * @ORM\Column(type="string", length=128)
      */
     public $first_name;
@@ -50,9 +35,19 @@ class User implements JsonSerializable
     public $email;
 
     /**
+     * @ORM\Column(type="string", length=72)
+     */
+    public $password;
+
+    /**
      * @ORM\Column(type="string", length=16)
      */
     public $phone_number;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public $team;
 
     /**
      * @ORM\Column(type="string", length=16)
@@ -70,29 +65,59 @@ class User implements JsonSerializable
     public $birth_date;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    public $receive_newsletter;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $avatar;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    public $creation_date;
+
+    /**
      * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="user")
      */
     public $accessTokens;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Academy", mappedBy="user")
+     */
+    public $academy;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserSubscription", mappedBy="user")
+     */
+    public $user_subscription;
 
     public function __construct()
     {
         $this->creation_date = new DateTime();
         $this->accessTokens = new ArrayCollection();
+        $this->academy = new ArrayCollection();
+        $this->user_subscription = new ArrayCollection();
     }
 
     public function jsonSerialize(): array
     {
         return [
             'id' => $this->id,
-            'admin' => $this->admin,
-            'creation_date' => $this->creation_date->format('Y-m-d H:i'),
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
+            'password' => $this->password,
             'phone_number' => $this->phone_number,
+            'team' => $this->team,
             'zip_code' => $this->zip_code,
             'house_number' => $this->house_number,
             'birth_date' => $this->birth_date->format('Y-m-d'),
+            'receive_newsletter' => $this->receive_newsletter,
+            'avatar' => $this->avatar,
+            'creation_date' => $this->creation_date->format('Y-m-d H:i'),
             'access_tokens' => array_filter($this->accessTokens->toArray(), function ($var) {
                 return $var->active;
             })
