@@ -4,11 +4,12 @@ import { css, StyleSheet } from 'aphrodite/no-important';
 
 type Props = {
   children: ReactNode,
+  inverse?: boolean,
   styles?: (CSSProperties | false)[],
   tag?: string
 };
 
-export const Hero = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
+export const Hero = ({ children, inverse = false, styles = [], tag: Tag = 'div' }: Props) => {
   const styleSheet = StyleSheet.create({
     hero: {
       position: 'relative',
@@ -25,8 +26,8 @@ export const Hero = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
       width: '100%',
       height: '100%',
       backgroundColor: '#68B34C',
-      transform: 'skewY(-3deg)',
-      transformOrigin: 'center left',
+      transform: `skewY(${inverse ? '3' : '-3'}deg)`,
+      transformOrigin: `center ${inverse ? 'right' : 'left'}`,
       zIndex: -1
     }
   });

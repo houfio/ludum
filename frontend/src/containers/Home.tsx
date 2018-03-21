@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { css, StyleSheet } from 'aphrodite/no-important';
+import { Field, reduxForm } from 'redux-form';
+import { push } from 'react-router-redux';
 
 import { Heading } from '../components/Heading';
 import { Row } from '../components/Row';
@@ -10,7 +12,16 @@ import { Hero } from '../components/Hero';
 import { Box } from '../components/Box';
 import { Input } from '../components/form/Input';
 
-export const Home = () => {
+type Form = {
+  query: string
+}
+
+export const Home = reduxForm<Form>({
+  form: 'search',
+  onSubmit: (values, dispatch) => {
+    dispatch(push(`/search?city=${values.query}`))
+  }
+})(({ handleSubmit }) => {
   const styleSheet = StyleSheet.create({
     heroText: {
       marginBottom: '2rem'
@@ -65,7 +76,9 @@ export const Home = () => {
     <>
       <Hero>
         <Heading text="Vind de perfecte voetbalschool in:" type="bold" styles={[styleSheet.heroText]}/>
-        <Input placeholder="Eindhoven"/>
+        <form onSubmit={handleSubmit}>
+          <Field name="query" type="text" placeholder="Eindhoven" component={Input}/>
+        </form>
       </Hero>
       <Row styles={[styleSheet.boxes]}>
         <Column breakpoints={breakpointsFirst}>
@@ -89,13 +102,14 @@ export const Home = () => {
         </Column>
         <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
           <Heading text="De beste voetbalscholen" type="bold" styles={[styleSheet.promoHeading]}/>
-          <p>Alle type voetbalscholen &amp; academies snel geindexeerd voor uw gemak</p>
+          <p>Alle type voetbalscholen &amp; academies snel geindexeerd voor jouw gemak</p>
           <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
         </Column>
         <Column breakpoints={breakpointsFirst} styles={[styleSheet.promoText]}>
-          <Heading text="Gepersonaliseerd voor u" type="bold" styles={[styleSheet.promoHeading]}/>
+          <Heading text="Gepersonaliseerd voor jou" type="bold" styles={[styleSheet.promoHeading]}/>
           <p>
-            De voetbalscholen worden op een tal van manieren voor u gesorteerd, waardoor u alleen het allerbeste krijgt.
+            De voetbalscholen worden op een tal van manieren voor jou gesorteerd,
+            waardoor jij alleen het allerbeste krijgt.
           </p>
           <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
         </Column>
@@ -104,7 +118,17 @@ export const Home = () => {
             <img src="/img/computer.svg"/>
           </div>
         </Column>
+        <Column breakpoints={breakpointsFirst}>
+          <div className={css(styleSheet.promoImage)}>
+            <img src="/img/hottie.svg"/>
+          </div>
+        </Column>
+        <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
+          <Heading text="Perfect voor scouts" type="bold" styles={[styleSheet.promoHeading]}/>
+          <p>Hier mogen wij het eigenlijk niet over hebben, want het is best raar eigenlijk.</p>
+          <Button text="Zie de mogelijkheden" type="primary" styles={[styleSheet.promoButton]}/>
+        </Column>
       </Row>
     </>
   );
-};
+});

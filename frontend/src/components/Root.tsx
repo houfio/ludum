@@ -11,6 +11,8 @@ import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { Login } from '../containers/Login';
 import { Academy } from '../containers/Academy';
+import { Search } from '../containers/Search';
+import { Register } from '../containers/Register';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
@@ -40,6 +42,8 @@ export const Root = connect(class extends Component<typeof props> {
           <Switch location={location || createLocation(window.location.href)}>
             <Route path="/" exact={true} component={Home}/>
             <Route path="/login" exact={true} component={Login}/>
+            <Route path="/register" exact={true} component={Register}/>
+            <Route path="/search" exact={true} component={Search}/>
             <Route path="/academy/:id" exact={true} component={Academy}/>
           </Switch>
         </main>

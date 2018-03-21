@@ -57,7 +57,7 @@ class ArgumentStrategy implements StrategyInterface
                 throw new HttpArrayException($validator->errors(), 422);
             }
 
-            $response = call_user_func_array($callable, [$args, $vars]);
+            $response = call_user_func_array($callable, [$args, $vars, $request->getQueryParams()]);
 
             if (is_bool($response)) {
                 $response = new JsonResponse(['success' => $response]);

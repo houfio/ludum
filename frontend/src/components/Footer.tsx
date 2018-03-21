@@ -68,7 +68,7 @@ export const Footer = connect(class extends Component<typeof props> {
             <div className={css(styleSheet.background, styleSheet.topBackground)}/>
             <Heading text="Jouw voetbalschool ook op ludum?" type="bold" styles={[styleSheet.heading]}/>
             <div className={css(styleSheet.description)}>
-              Wil je jouw voetbalschool ook op ludum? Schrijf je hier in wij nemen contact met je op!
+              Wil je jouw voetbalschool ook op ludum? Schrijf je hier in en wij nemen contact met je op!
             </div>
             <Input placeholder="email adres" type="email"/>
           </div>

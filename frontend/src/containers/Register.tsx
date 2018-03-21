@@ -11,20 +11,22 @@ import { Button } from '../components/form/Button';
 import { Container } from '../components/Container';
 import { forBreakpoint } from '../utils/forBreakpoint';
 import { TABLET_LANDSCAPE } from '../constants';
-import { auth } from '../modules/auth';
 import { Link } from '../components/Link';
 
 type Form = {
+  first_name: string,
+  last_name: string,
   email: string,
-  password: string
+  password: string,
+  telephone: string
 }
 
 const { props, connect } = withProps<{}, InjectedFormProps>()();
 
-export const Login = connect(reduxForm<Form, typeof props>({
-  form: 'login',
-  onSubmit: (values, dispatch) => {
-    dispatch(auth.login({ email: values.email!, password: values.password! }));
+export const Register = connect(reduxForm<Form, typeof props>({
+  form: 'register',
+  onSubmit: values => {
+    console.log(values);
   }
 })(class extends Component<typeof props> {
   public render() {
@@ -55,8 +57,8 @@ export const Login = connect(reduxForm<Form, typeof props>({
         display: 'none',
         position: 'absolute',
         height: '12rem',
-        left: '-20vw',
-        top: '-2rem',
+        right: '-20vw',
+        top: '8rem',
         ...forBreakpoint(TABLET_LANDSCAPE, {
           display: 'block'
         })
@@ -64,18 +66,33 @@ export const Login = connect(reduxForm<Form, typeof props>({
     });
 
     return (
-      <Hero styles={[styleSheet.hero]}>
+      <Hero inverse={true} styles={[styleSheet.hero]}>
         <Container styles={[styleSheet.container]}>
-          <Heading text="inloggen" type="bold" styles={[styleSheet.heading]}/>
+          <Heading text="registreren" type="bold" styles={[styleSheet.heading]}/>
           <div>
-            I see. So our trusty Phoenix Wright is back with us now, is he?
-            Who are you? At least hear the case before you decide on the outcome, Your Honor!
-            Wait, hold on. Laaaaaaryyyy! It was you!? YOU'RE the one who wrote my Steel Samurai autograph!?
-            (...she says with a silly smile plastered on her face...) So do you know anything about it that might help?
-            Order Order! Mr Godot! Can you explain this?
+            I have no real interest in the perceived worth of other people. As for my own worth,
+            that is something only I can determine for myself. Well, maybe it was a typo!
+            It might have said, 'Spaghetti Festival'. What do you think? Well done, Apollo.
+            It almost as if you figured it out yourself. There you are! Where have you been?
+            My sister's trial is tomorrow! Very well, witness. Please describe the incident to us.
+            It's OK. Just give back the necklace.
           </div>
         </Container>
         <form className={css(styleSheet.form)} onSubmit={handleSubmit}>
+          <Field
+            name="first_name"
+            type="text"
+            placeholder="voornaam"
+            component={Input}
+            styles={[styleSheet.formItem]}
+          />
+          <Field
+            name="last_name"
+            type="text"
+            placeholder="achternaam"
+            component={Input}
+            styles={[styleSheet.formItem]}
+          />
           <Field
             name="email"
             type="email"
@@ -90,9 +107,9 @@ export const Login = connect(reduxForm<Form, typeof props>({
             component={Input}
             styles={[styleSheet.formItem]}
           />
-          <Button text="inloggen" htmlType="submit" styles={[styleSheet.formItem]}/>
-          <Link text="Nog geen account? Registreer je hier!" target="/register"/>
-          <img src="/img/sliding_guy.svg" className={css(styleSheet.image)}/>
+          <Button text="registreren" htmlType="submit" styles={[styleSheet.formItem]}/>
+          <Link text="Al een account? Log je hier in!" target="/login"/>
+          <img src="/img/proud_guy.svg" className={css(styleSheet.image)}/>
         </form>
       </Hero>
     );

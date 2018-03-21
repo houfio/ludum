@@ -1,6 +1,7 @@
 import { RouterState } from 'react-router-redux';
 import { FormState } from 'redux-form';
 import { Action } from 'redux';
+import { Academy } from './api/Academy';
 
 export type State = {
   router: RouterState,
@@ -10,6 +11,10 @@ export type State = {
     queue: {
       [T in Queue['queue']]?: number
     }
+  },
+  academy: {
+    results: Academy[],
+    current?: Academy
   }
 }
 
@@ -18,7 +23,7 @@ export type Token = {
 };
 
 export type Queue = {
-  queue: 'all' | 'save'
+  queue: 'all' | 'save' | 'load'
 }
 
 export type HeadingTypes = 'bold' | 'thin' | 'subtle';
