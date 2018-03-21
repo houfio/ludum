@@ -1,0 +1,9 @@
+{
+  "name": "ludum/backend",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Ludum\\": "src/"
+    }
+  }
+}
