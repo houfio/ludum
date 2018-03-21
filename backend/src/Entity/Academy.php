@@ -42,7 +42,7 @@ class Academy implements JsonSerializable
     /**
      * @ORM\Column(type="string", length=32)
      */
-    public $location;
+    public $city;
 
     /**
      * @ORM\Column(type="string", length=6)
@@ -103,7 +103,7 @@ class Academy implements JsonSerializable
             'description' => $this->description,
             'header_image' => $this->header_image,
             'zip_code' => $this->zip_code,
-            'location' => $this->location,
+            'city' => $this->city,
             'building_number' => $this->building_number,
             'creation_date' => $this->creation_date->format('Y-m-d H:i')
         ];

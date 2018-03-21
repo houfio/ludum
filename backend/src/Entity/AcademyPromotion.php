@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
 /**
- * @ORM\Table(name="promotions")
+ * @ORM\Table(name="academy_promotions")
  * @ORM\Entity
  */
 class AcademyPromotion implements JsonSerializable

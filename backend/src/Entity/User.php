@@ -55,6 +55,11 @@ class User implements JsonSerializable
     public $zip_code;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    public $city;
+
+    /**
      * @ORM\Column(type="string", length=16, nullable=true)
      */
     public $house_number;
@@ -140,6 +145,7 @@ class User implements JsonSerializable
             'phone_number' => $this->phone_number,
             'team' => $this->team,
             'zip_code' => $this->zip_code,
+            'city' => $this->city,
             'house_number' => $this->house_number,
             'birth_date' => isset($this->birth_date) ? $this->birth_date->format('Y-m-d') : null,
             'receive_newsletter' => $this->receive_newsletter,
