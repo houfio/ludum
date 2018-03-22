@@ -108,6 +108,8 @@ export const Search = connect(reduxForm<Form, typeof props>({
       }
     });
 
+    const onChange = handle(setTimeout, handle(submit, 'search_results'));
+
     return (
       <form onSubmit={handleSubmit}>
         <Hero styles={[styleSheet.hero]}>
@@ -118,12 +120,18 @@ export const Search = connect(reduxForm<Form, typeof props>({
           <Row>
             <Column breakpoints={{ [TABLET_LANDSCAPE]: 3 }}>
               <Heading text="leeftijd" type="bold"/>
-              <Field name="age" type="number" component={Input} styles={[styleSheet.filter]}/>
+              <Field
+                name="age"
+                type="number"
+                component={Input}
+                styles={[styleSheet.filter]}
+                onChange={onChange}
+              />
               <Heading text="positie" type="bold"/>
               <Field
                 name="position"
                 component={Select}
-                onChange={handle(setTimeout, handle(submit, 'search_results'))}
+                onChange={onChange}
                 styles={[styleSheet.filter]}
               >
                 <option/>
@@ -135,7 +143,7 @@ export const Search = connect(reduxForm<Form, typeof props>({
               <Field
                 name="member_count"
                 component={Select}
-                onChange={handle(setTimeout, handle(submit, 'member_count'))}
+                onChange={onChange}
                 styles={[styleSheet.filter]}
               >
                 <option/>

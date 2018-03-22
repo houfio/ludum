@@ -10,6 +10,7 @@ export const Select = ({ styles = [], ...props }) => {
       padding: '1.25rem 2.25rem',
       border: 'none',
       borderRadius: '2rem',
+      appearance: 'none',
       '::placeholder': {
         fontWeight: 600
       }
