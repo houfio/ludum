@@ -5,6 +5,7 @@ import { Action } from 'redux';
 import { Academy } from './api/Academy';
 import { ScoutSubscription } from './api/ScoutSubscription';
 import { User } from './api/User';
+import { Position } from './api/Position';
 
 export type State = {
   router: RouterState,
@@ -25,7 +26,8 @@ export type State = {
     scout?: ScoutSubscription[]
   },
   content: {
-    ghostNav: boolean
+    ghostNav: boolean,
+    positions?: Position[]
   }
 }
 

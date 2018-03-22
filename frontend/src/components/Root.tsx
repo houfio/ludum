@@ -15,14 +15,25 @@ import { Search } from '../containers/Search';
 import { Register } from '../containers/Register';
 import { Scout } from '../containers/Scout';
 import { Profile } from '../containers/Profile';
+import { content } from '../modules/content';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
 });
 
-const { props, connect } = withProps()(mapStateToProps);
+const getActionCreators = () => ({
+  getPositions: content.getPositions
+});
+
+const { props, connect } = withProps()(mapStateToProps, getActionCreators);
 
 export const Root = connect(class extends Component<typeof props> {
+  public componentDidMount() {
+    const { getPositions } = this.props;
+
+    getPositions();
+  }
+
   public render() {
     const { location } = this.props;
 
