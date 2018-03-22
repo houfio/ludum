@@ -1,7 +1,9 @@
 <?php
 namespace Ludum\Core;
 
+use Ludum\Core\Interfaces\PaymentAwareInterface;
 use Ludum\Core\Traits\EntityManagerAwareTrait;
+use Ludum\Core\Traits\PaymentAwareTrait;
 use Ludum\Core\Traits\RequestAwareTrait;
 use Ludum\Core\Interfaces\EntityManagerAwareInterface;
 use Ludum\Core\Interfaces\RequestAwareInterface;
@@ -11,11 +13,12 @@ use League\Container\ContainerAwareInterface;
 use League\Container\ContainerAwareTrait;
 use League\Route\Http\Exception\UnauthorizedException;
 
-abstract class Controller implements ContainerAwareInterface, RequestAwareInterface, EntityManagerAwareInterface
+abstract class Controller implements ContainerAwareInterface, RequestAwareInterface, EntityManagerAwareInterface, PaymentAwareInterface
 {
     use ContainerAwareTrait;
     use RequestAwareTrait;
     use EntityManagerAwareTrait;
+    use PaymentAwareTrait;
 
     public abstract function initialize(): RouteSet;
 

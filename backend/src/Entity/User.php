@@ -85,7 +85,7 @@ class User implements JsonSerializable
     public $creation_date;
 
     /**
-     * @@ORM\Column(type="float")
+     * @ORM\Column(type="float")
      */
     public $balance = 0;
 
@@ -115,6 +115,11 @@ class User implements JsonSerializable
     public $subscriptions;
 
     /**
+     * @ORM\OneToMany(targetEntity="UserSubscription", mappedBy="user")
+     */
+    public $order;
+
+    /**
      * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="user")
      */
     public $events;
@@ -129,6 +134,8 @@ class User implements JsonSerializable
      */
     public $position;
 
+
+
     public function __construct()
     {
         $this->creation_date = new DateTime();
@@ -138,6 +145,7 @@ class User implements JsonSerializable
         $this->subscriptions = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->order = new ArrayCollection();
     }
 
     public function jsonSerialize(): array

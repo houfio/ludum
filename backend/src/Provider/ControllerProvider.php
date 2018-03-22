@@ -9,7 +9,8 @@ class ControllerProvider extends AbstractServiceProvider
         'Ludum\Controller\ApiController',
         'Ludum\Controller\UserController',
         'Ludum\Controller\AcademyController',
-        'Ludum\Controller\SubscriptionController'
+        'Ludum\Controller\SubscriptionController',
+        'Ludum\Controller\PaymentController'
     ];
 
     public function provides($alias = null)

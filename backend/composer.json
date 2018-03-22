@@ -5,7 +5,8 @@
     "league/container": "^2.4",
     "league/route": "^3.0",
     "zendframework/zend-diactoros": "^1.7",
-    "vlucas/valitron": "^1.4"
+    "vlucas/valitron": "^1.4",
+    "mollie/mollie-api-php": "1.9.*"
   },
   "autoload": {
     "psr-4": {
