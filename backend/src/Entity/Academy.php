@@ -89,6 +89,17 @@ class Academy implements JsonSerializable
      */
     public $purchasables;
 
+    /**
+     * @ORM\Column(type="integer", length=6, nullable=true)
+     */
+    public $min_age;
+
+    /**
+     * @ORM\Column(type="integer", length=6, nullable=true)
+     */
+    public $max_age;
+
+
     public function __construct()
     {
         $this->creation_date = new DateTime('now');
@@ -107,6 +118,8 @@ class Academy implements JsonSerializable
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'min_age' => $this->min_age,
+            'max_age' => $this->max_age,
             'header_image' => $this->header_image,
             'zip_code' => $this->zip_code,
             'city' => $this->city,

@@ -19,7 +19,7 @@ class ScoutSubscription implements JsonSerializable
     public $id;
 
     /**
-     * @@ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=55)
      */
     public $title;
 
