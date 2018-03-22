@@ -8,6 +8,7 @@ import { State } from '../types';
 import { academy } from '../modules/academy';
 import { Hero } from '../components/Hero';
 import { Heading } from '../components/Heading';
+import { Container } from '../components/Container';
 
 type Params = {
   id: string
@@ -52,6 +53,9 @@ export const Academy = connect(class extends Component<typeof props> {
     const styleSheet = StyleSheet.create({
       heading: {
         textShadow: '0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23)'
+      },
+      container: {
+        margin: '38rem 0 4rem 0'
       }
     });
 
@@ -60,7 +64,9 @@ export const Academy = connect(class extends Component<typeof props> {
         <Hero image={current.header_image}>
           <Heading text={current.name} type="bold" styles={[Boolean(current.header_image) && styleSheet.heading]}/>
         </Hero>
-        {}
+        <Container styles={[styleSheet.container]}>
+          {current.description}
+        </Container>
       </>
     );
   }

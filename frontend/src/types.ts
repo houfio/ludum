@@ -1,13 +1,17 @@
 import { RouterState } from 'react-router-redux';
 import { FormState } from 'redux-form';
 import { Action } from 'redux';
+
 import { Academy } from './api/Academy';
 import { ScoutSubscription } from './api/ScoutSubscription';
+import { User } from './api/User';
 
 export type State = {
   router: RouterState,
   form: FormState,
-  auth: Partial<Token>,
+  auth: Partial<Token> & {
+    user?: User
+  },
   http: {
     queue: {
       [T in Queue['queue']]?: number

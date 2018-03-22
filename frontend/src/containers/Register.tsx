@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { css, StyleSheet } from 'aphrodite/no-important';
+import { push } from 'react-router-redux';
 
 import { withProps } from '../utils/withProps';
 import { Hero } from '../components/Hero';
@@ -12,6 +13,7 @@ import { Container } from '../components/Container';
 import { forBreakpoint } from '../utils/forBreakpoint';
 import { TABLET_LANDSCAPE } from '../constants';
 import { Link } from '../components/Link';
+import { auth } from '../modules/auth';
 
 type Form = {
   first_name: string,
@@ -25,8 +27,12 @@ const { props, connect } = withProps<{}, InjectedFormProps>()();
 
 export const Register = connect(reduxForm<Form, typeof props>({
   form: 'register',
-  onSubmit: values => {
-    console.log(values);
+  onSubmit: (values, dispatch) => {
+    const promise = dispatch(auth.register(values as Required<Form>)) as any as Promise<any>;
+
+    promise.then(() => {
+      dispatch(push('/profile'))
+    });
   }
 })(class extends Component<typeof props> {
   public render() {

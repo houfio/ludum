@@ -111,7 +111,6 @@ export const Search = connect(reduxForm<Form, typeof props>({
         <Container styles={[styleSheet.container]}>
           <Row>
             <Column breakpoints={{ [TABLET_LANDSCAPE]: 3 }}>
-              <Heading text="waardering" type="bold"/>
               <Heading text="leeftijd" type="bold"/>
               <Heading text="positie" type="bold"/>
               <Heading text="leerlingen" type="bold"/>

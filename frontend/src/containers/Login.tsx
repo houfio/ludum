@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { css, StyleSheet } from 'aphrodite/no-important';
+import { push } from 'react-router-redux';
 
 import { withProps } from '../utils/withProps';
 import { Hero } from '../components/Hero';
@@ -24,7 +25,11 @@ const { props, connect } = withProps<{}, InjectedFormProps>()();
 export const Login = connect(reduxForm<Form, typeof props>({
   form: 'login',
   onSubmit: (values, dispatch) => {
-    dispatch(auth.login({ email: values.email!, password: values.password! }));
+    const promise = dispatch(auth.login(values as Required<Form>)) as any as Promise<any>;
+
+    promise.then(() => {
+      dispatch(push('/profile'))
+    });
   }
 })(class extends Component<typeof props> {
   public render() {

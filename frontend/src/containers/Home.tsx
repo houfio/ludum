@@ -119,7 +119,7 @@ export const Home = reduxForm<Form>({
         </Column>
         <Column breakpoints={breakpointsFirst}>
           <div className={css(styleSheet.promoImage)}>
-            <img src="/img/hottie.svg"/>
+            <img src="/img/scout.svg"/>
           </div>
         </Column>
         <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
