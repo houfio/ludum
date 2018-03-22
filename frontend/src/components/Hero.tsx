@@ -47,6 +47,8 @@ export const Hero = connect(class extends Component<typeof props> {
       },
       heroBackground: {
         position: 'absolute',
+        display: 'flex',
+        alignItems: 'center',
         top: '0',
         left: '0',
         width: '100%',
