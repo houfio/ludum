@@ -53,10 +53,35 @@ class AcademyController extends Controller
         
         if (isset($query['position'])) {
             $queryBuilder = $queryBuilder
-                ->innerJoin(AcademyPosition::class, 'p', 'with', 'a.id = p.academy')
-                ->innerJoin(Position::class, 'pos', 'with', 'p.position = pos.id')
+                ->leftJoin(AcademyPosition::class, 'p', 'with', 'a.id = p.academy')
+                ->leftJoin(Position::class, 'pos', 'with', 'p.position = pos.id')
                 ->andWhere('pos.id = :position')
                 ->setParameter('position', $query['position']);
+        }
+
+        if (isset($query['member_count'])) {
+            $having = 'count(u.id) < 5';
+
+            switch ($query['member_count']) {
+                case '1':
+                    $having = 'count(u.id) >= 5 and count(u.id) < 10';
+                    break;
+                case '2':
+                    $having = 'count(u.id) >= 10 and count(u.id) < 25';
+                    break;
+                case '3':
+                    $having = 'count(u.id) >= 25 and count(u.id) < 50';
+                    break;
+                case '4':
+                    $having = 'count(u.id) >= 50';
+                    break;
+            }
+
+            $queryBuilder = $queryBuilder
+                ->leftJoin(AcademySubscription::class, 's', 'with', 'a.id = s.academy')
+                ->leftJoin(UserSubscription::class, 'u', 'with', 's.id = u.subscription')
+                ->groupBy('a.id')
+                ->having($having);
         }
 
         $executableQuery = $queryBuilder->getQuery();
