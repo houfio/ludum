@@ -1,5 +1,4 @@
 <?php
-
 namespace Ludum\Controller;
 
 use Ludum\Core\Controller;
