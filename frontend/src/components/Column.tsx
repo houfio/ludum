@@ -20,7 +20,7 @@ export const Column = ({ children, breakpoints, styles = [], tag: Tag = 'div' }:
       ...forBreakpoints(breakpoints, value => {
         if (isNumber(value)) {
           return {
-            flexBasis: value && `${100 / 12 * value}%`,
+            flexBasis: value && `${100 / 12 * value}%`
           };
         }
 

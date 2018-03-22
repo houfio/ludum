@@ -44,14 +44,13 @@ export const Home = reduxForm<Form>({
     },
     promoText: {
       display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center'
+      alignItems: 'center'
     },
     promoButton: {
       marginTop: '.5rem'
     },
     promoImage: {
-      padding: '4rem'
+      margin: '4rem'
     }
   });
 
@@ -100,17 +99,21 @@ export const Home = reduxForm<Form>({
           </div>
         </Column>
         <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
-          <Heading text="De beste voetbalscholen" type="bold"/>
-          <p>Alle type voetbalscholen &amp; academies snel geindexeerd voor jouw gemak</p>
-          <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
+          <div className={css(styleSheet.promoImage)}>
+            <Heading text="De beste voetbalscholen" type="bold"/>
+            <p>Alle type voetbalscholen &amp; academies snel geindexeerd voor jouw gemak</p>
+            <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
+          </div>
         </Column>
         <Column breakpoints={breakpointsFirst} styles={[styleSheet.promoText]}>
-          <Heading text="Gepersonaliseerd voor jou" type="bold"/>
-          <p>
-            De voetbalscholen worden op een tal van manieren voor jou gesorteerd,
-            waardoor jij alleen het allerbeste krijgt.
-          </p>
-          <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
+          <div className={css(styleSheet.promoImage)}>
+            <Heading text="Gepersonaliseerd voor jou" type="bold"/>
+            <p>
+              De voetbalscholen worden op een tal van manieren voor jou gesorteerd,
+              waardoor jij alleen het allerbeste krijgt.
+            </p>
+            <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
+          </div>
         </Column>
         <Column breakpoints={breakpointsSecond}>
           <div className={css(styleSheet.promoImage)}>
@@ -123,13 +126,15 @@ export const Home = reduxForm<Form>({
           </div>
         </Column>
         <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
-          <Heading text="Perfect voor scouts" type="bold"/>
-          <p>Hier mogen wij het eigenlijk niet over hebben, want het is best raar eigenlijk.</p>
-          <Button
-            text="Zie de mogelijkheden"
-            type="primary"
-            styles={[styleSheet.promoButton]}
-          />
+          <div className={css(styleSheet.promoImage)}>
+            <Heading text="Perfect voor scouts" type="bold"/>
+            <p>Hier mogen wij het eigenlijk niet over hebben, want het is best raar eigenlijk.</p>
+            <Button
+              text="Zie de mogelijkheden"
+              type="primary"
+              styles={[styleSheet.promoButton]}
+            />
+          </div>
         </Column>
       </Row>
     </>

@@ -8,5 +8,6 @@ export type Academy = Identifiable & {
   zip_code: string,
   city: string,
   building_number: string,
-  creation_date: string
+  creation_date: string,
+  stars: number
 };
