@@ -51,11 +51,8 @@ export const Academy = connect(class extends Component<typeof props> {
     }
 
     const styleSheet = StyleSheet.create({
-      heading: {
-        textShadow: '0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23)'
-      },
       container: {
-        marginTop: '38rem',
+        marginTop: '36rem',
         marginBottom: '4rem'
       },
       description: {
@@ -66,10 +63,9 @@ export const Academy = connect(class extends Component<typeof props> {
 
     return (
       <>
-        <Hero image={current.header_image}>
-          <Heading text={current.name} type="bold" styles={[Boolean(current.header_image) && styleSheet.heading]}/>
-        </Hero>
+        <Hero image={current.header_image}/>
         <Container styles={[styleSheet.container]}>
+          <Heading text={current.name} type="bold"/>
           <span className={css(styleSheet.description)}>{current.description}</span>
         </Container>
       </>

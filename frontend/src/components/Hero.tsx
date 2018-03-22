@@ -6,7 +6,7 @@ import { withProps } from '../utils/withProps';
 import { content } from '../modules/content';
 
 type Props = {
-  children: ReactNode,
+  children?: ReactNode,
   image?: string,
   inverse?: boolean,
   styles?: (CSSProperties | false)[],
