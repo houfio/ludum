@@ -55,10 +55,12 @@ export const Academy = connect(class extends Component<typeof props> {
         textShadow: '0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23)'
       },
       container: {
-        margin: '38rem 0 4rem 0'
+        marginTop: '38rem',
+        marginBottom: '4rem'
       },
       description: {
-        maxWidth: '300px'
+        display: 'block',
+        maxWidth: '600px'
       }
     });
 
