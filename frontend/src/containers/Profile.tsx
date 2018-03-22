@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import { reduxForm } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { Hero } from '../components/Hero';
 import { withProps } from '../utils/withProps';
@@ -23,7 +23,7 @@ const getActionCreators = () => ({
   clearUser: auth.clearUser
 });
 
-const { props, connect } = withProps()(mapStateToProps, getActionCreators);
+const { props, connect } = withProps<{}, InjectedFormProps>()(mapStateToProps, getActionCreators);
 
 export const Profile = connect(reduxForm<Form, typeof props>({
   form: 'profile',
