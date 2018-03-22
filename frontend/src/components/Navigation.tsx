@@ -10,7 +10,8 @@ import { State } from '../types';
 import { Container } from './Container';
 
 const mapStateToProps = (state: State) => ({
-  token: state.auth.token
+  token: state.auth.token,
+  ghostNav: state.content.ghostNav
 });
 
 const getActionCreators = () => ({
@@ -21,7 +22,7 @@ const { props, connect } = withProps()(mapStateToProps, getActionCreators);
 
 export const Navigation = connect(class extends Component<typeof props> {
   public render() {
-    const { token } = this.props;
+    const { token, ghostNav } = this.props;
     const { push } = this.props;
 
     const styleSheet = StyleSheet.create({
@@ -29,7 +30,13 @@ export const Navigation = connect(class extends Component<typeof props> {
         display: 'flex',
         backgroundColor: '#68B34C',
         padding: '2rem',
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        zIndex: 1,
+        transition: 'box-shadow .2s ease'
+      },
+      ghost: {
+        backgroundColor: 'transparent',
+        textShadow: '0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23)'
       },
       container: {
         display: 'flex',
@@ -43,13 +50,19 @@ export const Navigation = connect(class extends Component<typeof props> {
         transition: 'all .2s ease',
         ':hover': {
           color: '#68B34C',
-          backgroundColor: '#FFFFFF'
+          backgroundColor: '#FFFFFF',
+          textShadow: 'none'
         }
       }
     });
 
     return (
-      <nav className={css(styleSheet.navigation)}>
+      <nav
+        className={css(
+          styleSheet.navigation,
+          ghostNav && styleSheet.ghost
+        )}
+      >
         <Container styles={[styleSheet.container]}>
           <Logo/>
           {token ? (

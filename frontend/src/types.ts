@@ -19,6 +19,9 @@ export type State = {
   },
   subscriptions: {
     scout?: ScoutSubscription[]
+  },
+  content: {
+    ghostNav: boolean
   }
 }
 

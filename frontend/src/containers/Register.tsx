@@ -45,13 +45,11 @@ export const Register = connect(reduxForm<Form, typeof props>({
         flexDirection: 'column',
         margin: '5rem 0 -21rem 0',
         textAlign: 'center',
-        color: 'rgba(0, 0, 0, .75)'
+        color: 'rgba(0, 0, 0, .75)',
+        maxWidth: '80%'
       },
       formItem: {
         margin: '.5rem'
-      },
-      heading: {
-        display: 'inline-flex'
       },
       image: {
         display: 'none',
@@ -68,7 +66,7 @@ export const Register = connect(reduxForm<Form, typeof props>({
     return (
       <Hero inverse={true} styles={[styleSheet.hero]}>
         <Container styles={[styleSheet.container]}>
-          <Heading text="registreren" type="bold" styles={[styleSheet.heading]}/>
+          <Heading text="registreren" type="bold"/>
           <div>
             I have no real interest in the perceived worth of other people. As for my own worth,
             that is something only I can determine for myself. Well, maybe it was a typo!

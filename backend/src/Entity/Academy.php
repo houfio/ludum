@@ -30,6 +30,11 @@ class Academy implements JsonSerializable
     public $description;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     */
+    public $slogan;
+
+    /**
      * @ORM\Column(type="string", length=512)
      */
     public $header_image;
@@ -123,6 +128,7 @@ class Academy implements JsonSerializable
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'slogan' => $this->slogan,
             'min_age' => $this->min_age,
             'max_age' => $this->max_age,
             'header_image' => $this->header_image,

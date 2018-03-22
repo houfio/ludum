@@ -16,7 +16,7 @@ export const academy = createModule(
         queue: 'load'
       }),
       action => ({
-        results: action.data
+        results: action.data || []
       })
     ),
     clearResults: createAction('CLEAR_RESULTS')(

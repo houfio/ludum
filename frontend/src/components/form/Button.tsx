@@ -22,7 +22,7 @@ const buttonStyles: { [T in ButtonTypes]: CSSProperties } = {
   },
   secondary: {
     color: '#000000',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#EBEBEB',
     ':hover': {
       backgroundColor: '#F0F0F0'
     }

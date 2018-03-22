@@ -33,7 +33,6 @@ export const Heading = ({ text, type, styles = [] }: Props) => {
   const styleSheet = StyleSheet.create({
     heading: {
       display: 'block',
-      textAlign: 'center',
       ...headingSizes[type] as any
     }
   });

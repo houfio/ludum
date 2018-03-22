@@ -43,13 +43,11 @@ export const Login = connect(reduxForm<Form, typeof props>({
         flexDirection: 'column',
         margin: '5rem 0 -21rem 0',
         textAlign: 'center',
-        color: 'rgba(0, 0, 0, .75)'
+        color: 'rgba(0, 0, 0, .75)',
+        maxWidth: '80%'
       },
       formItem: {
         margin: '.5rem'
-      },
-      heading: {
-        display: 'inline-flex'
       },
       image: {
         display: 'none',
@@ -66,7 +64,7 @@ export const Login = connect(reduxForm<Form, typeof props>({
     return (
       <Hero styles={[styleSheet.hero]}>
         <Container styles={[styleSheet.container]}>
-          <Heading text="inloggen" type="bold" styles={[styleSheet.heading]}/>
+          <Heading text="inloggen" type="bold"/>
           <div>
             I see. So our trusty Phoenix Wright is back with us now, is he?
             Who are you? At least hear the case before you decide on the outcome, Your Honor!
