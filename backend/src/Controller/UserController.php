@@ -35,7 +35,9 @@ class UserController extends Controller
                 'receive_emails' => ['boolean'],
                 'phone_number' => ['regex' => [static::PHONE_NUMBER_REGEX]],
                 'zip_code' => ['regex' => [static::ZIP_CODE_REGEX]],
-                'house_number' => ['regex' => [static::HOUSE_NUMBER_REGEX]]
+                'house_number' => ['regex' => [static::HOUSE_NUMBER_REGEX]],
+                'receive_newsletter' => ['boolean'],
+                'team' => []
             ])
             ->post('user_update_password', '/user/update/password', 'postPassword', true, [
                 'password' => ['required', 'lengthMin' => [8]],
