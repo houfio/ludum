@@ -124,6 +124,11 @@ class User implements JsonSerializable
      */
     public $reviews;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Position")
+     */
+    public $position;
+
     public function __construct()
     {
         $this->creation_date = new DateTime();

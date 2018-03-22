@@ -99,6 +99,10 @@ class Academy implements JsonSerializable
      */
     public $max_age;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyPosition", mappedBy="academy")
+     */
+    public $positions;
 
     public function __construct()
     {
@@ -110,6 +114,7 @@ class Academy implements JsonSerializable
         $this->promotions = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->purchasables = new ArrayCollection();
+        $this->positions = new ArrayCollection();
     }
 
     public function jsonSerialize(): array

@@ -6,6 +6,10 @@ use League\Route\Http\Exception\UnprocessableEntityException;
 use Ludum\Core\Controller;
 use Ludum\Core\RouteSet;
 use Ludum\Entity\Academy;
+use Ludum\Entity\AcademyPosition;
+use Ludum\Entity\AcademySubscription;
+use Ludum\Entity\Position;
+use Ludum\Entity\UserSubscription;
 
 class AcademyController extends Controller
 {
@@ -34,9 +38,29 @@ class AcademyController extends Controller
             throw new UnprocessableEntityException();
         }
 
-        $academyRepo = $this->getEntityManager()->getRepository(Academy::class);
-        $academies = $academyRepo->findBy(['city' => $query['city']]);
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
+            ->select('a')
+            ->from(Academy::class, 'a')
+            ->where('a.city = :city')
+            ->setParameter('city', $query['city']);
 
-        return $academies;
+        if (isset($query['age'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('a.min_age <= :age')
+                ->andWhere('a.max_age >= :age')
+                ->setParameter('age', $query['age']);
+        }
+        
+        if (isset($query['position'])) {
+            $queryBuilder = $queryBuilder
+                ->innerJoin(AcademyPosition::class, 'p', 'with', 'a.id = p.academy')
+                ->innerJoin(Position::class, 'pos', 'with', 'p.position = pos.id')
+                ->andWhere('pos.id = :position')
+                ->setParameter('position', $query['position']);
+        }
+
+        $executableQuery = $queryBuilder->getQuery();
+
+        return $executableQuery->getResult();
     }
 }
