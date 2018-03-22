@@ -116,7 +116,7 @@ export const Profile = connect(reduxForm<Form, typeof props>({
               <div className={css(styleSheet.name)}>
                 <Heading text={`${user.first_name} ${user.last_name}`} type="bold" styles={[styleSheet.center]}/>
                 <span className={css(styleSheet.center, styleSheet.underText)}>
-                  <Link text="logout " target="/logout"/>
+                  <Link text="logout" target="/logout"/>
                   <span>&nbsp;|&nbsp;</span>
                   <Link text={`€${user.balance}`} target="/balance"/>
                 </span>

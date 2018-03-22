@@ -11,5 +11,6 @@ export type Academy = Identifiable & {
   creation_date: string,
   stars: number,
   min_age?: string,
-  max_age?: string
+  max_age?: string,
+  promotion?: boolean
 };

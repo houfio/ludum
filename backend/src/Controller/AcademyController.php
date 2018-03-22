@@ -7,6 +7,7 @@ use Ludum\Core\Controller;
 use Ludum\Core\RouteSet;
 use Ludum\Entity\Academy;
 use Ludum\Entity\AcademyPosition;
+use Ludum\Entity\AcademyPromotion;
 use Ludum\Entity\AcademySubscription;
 use Ludum\Entity\Position;
 use Ludum\Entity\UserSubscription;
@@ -50,7 +51,7 @@ class AcademyController extends Controller
                 ->andWhere('a.max_age >= :age')
                 ->setParameter('age', $query['age']);
         }
-        
+
         if (isset($query['position']) && !empty($query['position'])) {
             $queryBuilder = $queryBuilder
                 ->leftJoin(AcademyPosition::class, 'p', 'with', 'a.id = p.academy')
@@ -85,7 +86,14 @@ class AcademyController extends Controller
         }
 
         $executableQuery = $queryBuilder->getQuery();
+        $promotionRepo = $this->getEntityManager()->getRepository(AcademyPromotion::class);
+        $promotions = $promotionRepo->findAll();
 
-        return $executableQuery->getResult();
+        return array_merge(
+            array_map(function ($var) {
+                return array_merge($var->academy->jsonSerialize(), ['promotion' => true]);
+            }, $promotions),
+            $executableQuery->getResult()
+        );
     }
 }

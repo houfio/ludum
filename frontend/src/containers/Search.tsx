@@ -114,7 +114,7 @@ export const Search = connect(reduxForm<Form, typeof props>({
       <form onSubmit={handleSubmit}>
         <Hero styles={[styleSheet.hero]}>
           <Heading text="Zoeken in " type="bold" styles={[styleSheet.heading]}/>
-          <Field name="city" type="text" placeholder="Eindhoven" component={Input}/>
+          <Field name="city" type="text" placeholder="Eindhoven" component={Input} onChange={onChange}/>
         </Hero>
         <Container styles={[styleSheet.container]}>
           <Row>
