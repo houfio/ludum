@@ -124,6 +124,19 @@ class Academy implements JsonSerializable
 
     public function jsonSerialize(): array
     {
+        $reviews = $this->reviews->toArray();
+        $stars = array_reduce(
+            $reviews,
+            function ($previous, $current) {
+                return $previous + $current->stars;
+            },
+            0
+        );
+
+        error_log(json_encode([$stars, count($reviews)]));
+
+        $stars /= count($reviews);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -135,7 +148,8 @@ class Academy implements JsonSerializable
             'zip_code' => $this->zip_code,
             'city' => $this->city,
             'building_number' => $this->building_number,
-            'creation_date' => $this->creation_date->format('Y-m-d H:i')
+            'creation_date' => $this->creation_date->format('Y-m-d H:i'),
+            'stars' => $stars
         ];
     }
 }

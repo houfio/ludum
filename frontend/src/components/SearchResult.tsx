@@ -3,6 +3,7 @@ import { css, StyleSheet } from 'aphrodite/no-important';
 
 import { Academy } from '../api/Academy';
 import { Heading } from './Heading';
+import { Rating } from './Rating';
 
 type Props = {
   academy: Academy,
@@ -25,6 +26,9 @@ export const SearchResult = ({ academy, onClick }: Props) => {
       ':hover': {
         backgroundColor: '#EBEBEB'
       }
+    },
+    bottom: {
+      marginTop: '2rem'
     }
   });
 
@@ -32,8 +36,8 @@ export const SearchResult = ({ academy, onClick }: Props) => {
     <div className={css(styleSheet.result)} onClick={onClick}>
       <Heading text={academy.name} type="thin"/>
       <Heading text={academy.slogan} type="subtle"/>
-      <div>
-        hoi!
+      <div className={css(styleSheet.bottom)}>
+        <Rating rating={academy.stars}/>
       </div>
     </div>
   );
