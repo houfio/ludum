@@ -70,7 +70,7 @@ class UserController extends Controller
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 
-        return true;
+        return $this->postLogin($args);
     }
 
     public function postLogin(array $args)

@@ -41,8 +41,8 @@ class AcademyController extends Controller
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('a')
             ->from(Academy::class, 'a')
-            ->where('a.city = :city')
-            ->setParameter('city', $query['city']);
+            ->where('lower(a.city) like lower(:city)')
+            ->setParameter('city', '%' . $query['city'] . '%');
 
         if (isset($query['age'])) {
             $queryBuilder = $queryBuilder
