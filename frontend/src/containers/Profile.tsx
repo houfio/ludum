@@ -14,6 +14,7 @@ import { Container } from '../components/Container';
 import { Row } from '../components/Row';
 import { Column } from '../components/Column';
 import { TABLET_LANDSCAPE } from '../constants';
+import { Link } from '../components/Link';
 
 type Form = {
   email: string,
@@ -91,6 +92,13 @@ export const Profile = connect(reduxForm<Form, typeof props>({
         position: 'absolute',
         top: '-4rem'
       },
+      underText: {
+        marginTop: '-.5rem'
+      },
+      center: {
+        display: 'flex',
+        justifyContent: 'center'
+      },
       container: {
         marginBottom: '4rem'
       },
@@ -105,7 +113,14 @@ export const Profile = connect(reduxForm<Form, typeof props>({
         <Hero inverse={true} styles={[styleSheet.hero]}>
           <div className={css(styleSheet.avatar)}>
             {user && (
-              <Heading text={`${user.first_name} ${user.last_name}`} type="bold" styles={[styleSheet.name]}/>
+              <div className={css(styleSheet.name)}>
+                <Heading text={`${user.first_name} ${user.last_name}`} type="bold" styles={[styleSheet.center]}/>
+                <span className={css(styleSheet.center, styleSheet.underText)}>
+                  <Link text="logout " target="/logout"/>
+                  <span>&nbsp;|&nbsp;</span>
+                  <Link text={`€${user.balance}`} target="/balance"/>
+                </span>
+              </div>
             )}
             <img src="/img/avatar.svg" className={css(styleSheet.image)}/>
           </div>
