@@ -39,7 +39,7 @@ class ArgumentStrategy implements StrategyInterface
 
             $route = $routeSet->getRouteForPath($path);
             $args = array_intersect_key(json_decode(file_get_contents('php://input'), true) ?? [], $route['args']);
-            $validator = new Validator($args);
+            $validator = new Validator($args, [], 'nl');
 
             foreach ($route['args'] as $argument => $rules) {
                 foreach ($rules as $rule => $params) {

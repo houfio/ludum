@@ -15,12 +15,16 @@ export const auth = createModule(
         queue: 'save'
       }),
       action => {
-        const token = action.data!.token;
-        localStorage.setItem('token', token);
+        if (action.success) {
+          const token = action.data!.token;
+          localStorage.setItem('token', token);
 
-        return {
-          token
-        };
+          return {
+            token
+          };
+        }
+
+        return {};
       }
     ),
     logout: createAction<Token>('LOGOUT')(
@@ -33,7 +37,7 @@ export const auth = createModule(
 
         return {
           token: undefined
-        }
+        };
       }
     ),
     register: createAction<{ first_name: string, last_name: string, email: string, password: string }>('REGISTER')(
@@ -42,12 +46,16 @@ export const auth = createModule(
         queue: 'save'
       }),
       action => {
-        const token = action.data!.token;
-        localStorage.setItem('token', token);
+        if (action.success) {
+          const token = action.data!.token;
+          localStorage.setItem('token', token);
 
-        return {
-          token
-        };
+          return {
+            token
+          };
+        }
+
+        return {};
       }
     ),
     getUser: createAction<Token>('GET_USER')(
