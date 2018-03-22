@@ -30,7 +30,7 @@ class Academy implements JsonSerializable
     public $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=512)
      */
     public $header_image;
 
@@ -84,6 +84,11 @@ class Academy implements JsonSerializable
      */
     public $reviews;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AcademyPurchasable", mappedBy="academy")
+     */
+    public $purchasables;
+
     public function __construct()
     {
         $this->creation_date = new DateTime('now');
@@ -93,6 +98,7 @@ class Academy implements JsonSerializable
         $this->events = new ArrayCollection();
         $this->promotions = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->purchasables = new ArrayCollection();
     }
 
     public function jsonSerialize(): array
