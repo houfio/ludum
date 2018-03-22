@@ -47,7 +47,7 @@ export const Scout = connect(class extends Component<typeof props> {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 'calc(100% - 4rem)'
+        height: '100%'
       },
       boxImage: {
         height: '7rem'
