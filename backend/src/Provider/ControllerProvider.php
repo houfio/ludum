@@ -8,7 +8,8 @@ class ControllerProvider extends AbstractServiceProvider
     const CONTROLLERS = [
         'Ludum\Controller\ApiController',
         'Ludum\Controller\UserController',
-        'Ludum\Controller\AcademyController'
+        'Ludum\Controller\AcademyController',
+        'Ludum\Controller\SubscriptionController'
     ];
 
     public function provides($alias = null)

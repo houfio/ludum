@@ -126,7 +126,11 @@ export const Home = reduxForm<Form>({
         <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
           <Heading text="Perfect voor scouts" type="bold" styles={[styleSheet.promoHeading]}/>
           <p>Hier mogen wij het eigenlijk niet over hebben, want het is best raar eigenlijk.</p>
-          <Button text="Zie de mogelijkheden" type="primary" styles={[styleSheet.promoButton]}/>
+          <Button
+            text="Zie de mogelijkheden"
+            type="primary"
+            styles={[styleSheet.promoButton]}
+          />
         </Column>
       </Row>
     </>

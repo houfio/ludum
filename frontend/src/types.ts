@@ -2,6 +2,7 @@ import { RouterState } from 'react-router-redux';
 import { FormState } from 'redux-form';
 import { Action } from 'redux';
 import { Academy } from './api/Academy';
+import { ScoutSubscription } from './api/ScoutSubscription';
 
 export type State = {
   router: RouterState,
@@ -15,6 +16,9 @@ export type State = {
   academy: {
     results: Academy[],
     current?: Academy
+  },
+  subscriptions: {
+    scout?: ScoutSubscription[]
   }
 }
 
