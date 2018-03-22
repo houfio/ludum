@@ -1,3 +1,5 @@
+import { stringify } from 'query-string';
+
 import { createModule } from '../utils/createModule';
 import { createApiRequest } from '../utils/createApiRequest';
 import { Academy } from '../api/Academy';
@@ -10,9 +12,14 @@ export const academy = createModule(
     current: undefined
   },
   createAction => ({
-    searchAcademies: createAction<{ city: string }>('SEARCH_ACADEMIES')(
+    searchAcademies: createAction<{
+      city: string,
+      age?: string,
+      position?: string,
+      member_count?: string
+    }>('SEARCH_ACADEMIES')(
       payload => ({
-        promise: createApiRequest<Academy[]>('get', `academy/search?city=${payload.city}`),
+        promise: createApiRequest<Academy[]>('get', `academy/search?${stringify(payload)}`),
         queue: 'load'
       }),
       action => ({

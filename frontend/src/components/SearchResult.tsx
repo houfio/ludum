@@ -28,9 +28,22 @@ export const SearchResult = ({ academy, onClick }: Props) => {
       }
     },
     bottom: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       marginTop: '2rem'
     }
   });
+
+  let ages = 'Alle leeftijden';
+
+  if (academy.min_age && !academy.max_age) {
+    ages = `${academy.min_age}+`
+  } else if (!academy.min_age && academy.max_age) {
+    ages = `< ${academy.max_age}`
+  } else if (academy.min_age && academy.max_age) {
+    ages = `${academy.min_age}-${academy.max_age}`
+  }
 
   return (
     <div className={css(styleSheet.result)} onClick={onClick}>
@@ -38,6 +51,7 @@ export const SearchResult = ({ academy, onClick }: Props) => {
       <Heading text={academy.slogan} type="subtle"/>
       <div className={css(styleSheet.bottom)}>
         <Rating rating={academy.stars}/>
+        <span>{academy.city} | {ages}</span>
       </div>
     </div>
   );

@@ -44,14 +44,14 @@ class AcademyController extends Controller
             ->where('lower(a.city) like lower(:city)')
             ->setParameter('city', '%' . $query['city'] . '%');
 
-        if (isset($query['age'])) {
+        if (isset($query['age']) && !empty($query['age'])) {
             $queryBuilder = $queryBuilder
                 ->andWhere('a.min_age <= :age')
                 ->andWhere('a.max_age >= :age')
                 ->setParameter('age', $query['age']);
         }
         
-        if (isset($query['position'])) {
+        if (isset($query['position']) && !empty($query['position'])) {
             $queryBuilder = $queryBuilder
                 ->leftJoin(AcademyPosition::class, 'p', 'with', 'a.id = p.academy')
                 ->leftJoin(Position::class, 'pos', 'with', 'p.position = pos.id')
@@ -59,7 +59,7 @@ class AcademyController extends Controller
                 ->setParameter('position', $query['position']);
         }
 
-        if (isset($query['member_count'])) {
+        if (isset($query['member_count']) && !empty($query['member_count'])) {
             $having = 'count(u.id) < 5';
 
             switch ($query['member_count']) {

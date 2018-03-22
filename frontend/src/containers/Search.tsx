@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
 import * as queryString from 'query-string';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { stringify } from 'query-string';
+import { Field, InjectedFormProps, reduxForm, submit } from 'redux-form';
 import { StyleSheet } from 'aphrodite/no-important';
 
 import { withProps } from '../utils/withProps';
@@ -17,20 +18,26 @@ import { TABLET_LANDSCAPE } from '../constants';
 import { Container } from '../components/Container';
 import { SearchResult } from '../components/SearchResult';
 import { Heading } from '../components/Heading';
+import { Select } from '../components/form/Select';
 
 type Form = {
-  city: string
+  city: string,
+  age?: string,
+  position?: string,
+  member_count?: string
 }
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location,
-  results: state.academy.results
+  results: state.academy.results,
+  positions: state.content.positions
 });
 
 const getActionCreators = () => ({
   push,
   searchAcademies: academy.searchAcademies,
-  clearResults: academy.clearResults
+  clearResults: academy.clearResults,
+  submit
 });
 
 const { props, connect } = withProps<{}, InjectedFormProps>()(mapStateToProps, getActionCreators, state => ({
@@ -40,15 +47,13 @@ const { props, connect } = withProps<{}, InjectedFormProps>()(mapStateToProps, g
 export const Search = connect(reduxForm<Form, typeof props>({
   form: 'search_results',
   onSubmit: (values, _, props) => {
-    props.push(`/search?city=${values.city}`);
+    props.push(`/search?${stringify(values)}`);
   }
 })(class extends Component<typeof props> {
   public componentDidMount() {
     const { searchAcademies } = this.props;
 
-    const city = this.getTargetCity();
-
-    searchAcademies({ city });
+    searchAcademies(queryString.parse(location.search));
   }
 
   public componentWillUnmount() {
@@ -67,20 +72,18 @@ export const Search = connect(reduxForm<Form, typeof props>({
     }
 
     if (location.search !== nextLocation.search) {
-      const city = this.getTargetCity(next);
-
-      searchAcademies({ city });
+      searchAcademies(queryString.parse(nextLocation.search));
     }
   }
 
   public render() {
     const { handleSubmit } = this.props;
-    const { results } = this.props;
-    const { push } = this.props;
+    const { results, positions } = this.props;
+    const { push, submit } = this.props;
 
-    const city = this.getTargetCity();
+    const params = queryString.parse(location.search);
 
-    if (!city) {
+    if (!params.city) {
       push('/');
 
       return false;
@@ -97,23 +100,51 @@ export const Search = connect(reduxForm<Form, typeof props>({
       },
       container: {
         marginBottom: '5rem'
+      },
+      filter: {
+        marginBottom: '1rem',
+        marginLeft: '-1rem',
+        width: '100%'
       }
     });
 
     return (
-      <>
+      <form onSubmit={handleSubmit}>
         <Hero styles={[styleSheet.hero]}>
           <Heading text="Zoeken in " type="bold" styles={[styleSheet.heading]}/>
-          <form onSubmit={handleSubmit}>
-            <Field name="city" type="text" placeholder="Eindhoven" component={Input}/>
-          </form>
+          <Field name="city" type="text" placeholder="Eindhoven" component={Input}/>
         </Hero>
         <Container styles={[styleSheet.container]}>
           <Row>
             <Column breakpoints={{ [TABLET_LANDSCAPE]: 3 }}>
               <Heading text="leeftijd" type="bold"/>
+              <Field name="age" type="number" component={Input} styles={[styleSheet.filter]}/>
               <Heading text="positie" type="bold"/>
+              <Field
+                name="position"
+                component={Select}
+                onChange={handle(setTimeout, handle(submit, 'search_results'))}
+                styles={[styleSheet.filter]}
+              >
+                <option/>
+                {positions && positions.map(position => (
+                  <option key={position.id} value={position.id}>{position.name}</option>
+                ))}
+              </Field>
               <Heading text="leerlingen" type="bold"/>
+              <Field
+                name="member_count"
+                component={Select}
+                onChange={handle(setTimeout, handle(submit, 'member_count'))}
+                styles={[styleSheet.filter]}
+              >
+                <option/>
+                <option value="0">&lt;5</option>
+                <option value="1">5-9</option>
+                <option value="2">10-24</option>
+                <option value="3">24-49</option>
+                <option value="4">&gt;50</option>
+              </Field>
             </Column>
             <Column breakpoints={{ [TABLET_LANDSCAPE]: 9 }}>
               {results.map(result => (
@@ -122,19 +153,7 @@ export const Search = connect(reduxForm<Form, typeof props>({
             </Column>
           </Row>
         </Container>
-      </>
+      </form>
     );
   }
-
-  private getTargetCity = (props = this.props) => {
-    const { location } = props;
-
-    if (!location) {
-      return;
-    }
-
-    const params = queryString.parse(location.search);
-
-    return params.city;
-  };
 } as any) as any);

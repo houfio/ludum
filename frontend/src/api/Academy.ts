@@ -9,5 +9,7 @@ export type Academy = Identifiable & {
   city: string,
   building_number: string,
   creation_date: string,
-  stars: number
+  stars: number,
+  min_age?: string,
+  max_age?: string
 };
