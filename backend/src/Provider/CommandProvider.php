@@ -1,17 +1,23 @@
 <?php
 namespace Ludum\Provider;
 
+use Doctrine\ORM\Tools\Console\Command\GenerateProxiesCommand;
+use Doctrine\ORM\Tools\Console\Command\InfoCommand;
+use Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand;
+use Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand;
+use Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use Ludum\Command\RunServerCommand;
 
 class CommandProvider extends AbstractServiceProvider
 {
     const COMMANDS = [
-        'Ludum\Command\RunServerCommand',
-        'Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand',
-        'Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand',
-        'Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand',
-        'Doctrine\ORM\Tools\Console\Command\GenerateProxiesCommand',
-        'Doctrine\ORM\Tools\Console\Command\InfoCommand'
+        RunServerCommand::class,
+        CreateCommand::class,
+        DropCommand::class,
+        UpdateCommand::class,
+        GenerateProxiesCommand::class,
+        InfoCommand::class
     ];
 
     public function provides($alias = null)

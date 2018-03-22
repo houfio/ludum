@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { StyleSheet } from 'aphrodite/no-important';
+import { css, StyleSheet } from 'aphrodite/no-important';
 
 import { withProps } from '../utils/withProps';
 import { State } from '../types';
@@ -56,6 +56,9 @@ export const Academy = connect(class extends Component<typeof props> {
       },
       container: {
         margin: '38rem 0 4rem 0'
+      },
+      description: {
+        maxWidth: '300px'
       }
     });
 
@@ -65,7 +68,7 @@ export const Academy = connect(class extends Component<typeof props> {
           <Heading text={current.name} type="bold" styles={[Boolean(current.header_image) && styleSheet.heading]}/>
         </Hero>
         <Container styles={[styleSheet.container]}>
-          {current.description}
+          <span className={css(styleSheet.description)}>{current.description}</span>
         </Container>
       </>
     );
