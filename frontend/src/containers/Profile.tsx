@@ -174,20 +174,22 @@ export const Profile = connect(reduxForm<Form, typeof props>({
             </Column>
           </Row>
         </Container>
-        <Hero narrow={true} styles={[styleSheet.section]}>
-          <Container>
-            <Row>
-              {user && user.events.map(event => (
-                <Column key={event.id} breakpoints={{ [TABLET_LANDSCAPE]: 4, [DESKTOP]: 3, [BIG_DESKTOP]: 2 }}>
-                  <Box styles={[styleSheet.review]}>
-                    <Heading text={event.description} type="thin"/>
-                    <Heading text={event.date} type="subtle"/>
-                  </Box>
-                </Column>
-              ))}
-            </Row>
-          </Container>
-        </Hero>
+        {user && user.events.length && (
+          <Hero narrow={true} styles={[styleSheet.section]}>
+            <Container>
+              <Row>
+                {user.events.map(event => (
+                  <Column key={event.id} breakpoints={{ [TABLET_LANDSCAPE]: 4, [DESKTOP]: 3, [BIG_DESKTOP]: 2 }}>
+                    <Box styles={[styleSheet.review]}>
+                      <Heading text={event.description} type="thin"/>
+                      <Heading text={event.date} type="subtle"/>
+                    </Box>
+                  </Column>
+                ))}
+              </Row>
+            </Container>
+          </Hero>
+        )}
       </>
     );
   }
