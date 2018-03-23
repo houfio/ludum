@@ -15,6 +15,7 @@ import { Row } from '../components/Row';
 import { Column } from '../components/Column';
 import { TABLET_LANDSCAPE } from '../constants';
 import { Link } from '../components/Link';
+import { Select } from '../components/form/Select';
 
 type Form = {
   email: string,
@@ -28,7 +29,8 @@ type Form = {
 
 const mapStateToProps = (state: State) => ({
   token: state.auth.token,
-  user: state.auth.user
+  user: state.auth.user,
+  positions: state.content.positions
 });
 
 const getActionCreators = () => ({
@@ -71,7 +73,7 @@ export const Profile = connect(reduxForm<Form, typeof props>({
 
   public render() {
     const { handleSubmit } = this.props;
-    const { user } = this.props;
+    const { user, positions } = this.props;
 
     const styleSheet = StyleSheet.create({
       hero: {
@@ -143,6 +145,23 @@ export const Profile = connect(reduxForm<Form, typeof props>({
                   component={Input}
                   styles={[styleSheet.formItem]}
                 />
+                <Field
+                  name="team"
+                  type="text"
+                  placeholder="team"
+                  component={Input}
+                  styles={[styleSheet.formItem]}
+                />
+                <Field
+                  name="position"
+                  component={Select}
+                  styles={[styleSheet.formItem]}
+                >
+                  <option/>
+                  {positions && positions.map(position => (
+                    <option key={position.id} value={position.id}>{position.name}</option>
+                  ))}
+                </Field>
               </form>
             </Column>
           </Row>

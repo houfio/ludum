@@ -11,6 +11,7 @@ import { Button } from '../components/form/Button';
 import { Hero } from '../components/Hero';
 import { Box } from '../components/Box';
 import { Input } from '../components/form/Input';
+import { Container } from '../components/Container';
 
 type Form = {
   city: string
@@ -51,6 +52,9 @@ export const Home = reduxForm<Form>({
     },
     promoImage: {
       margin: '4rem'
+    },
+    inputWidth: {
+      maxWidth: '85%'
     }
   });
 
@@ -71,10 +75,12 @@ export const Home = reduxForm<Form>({
   return (
     <>
       <Hero>
-        <Heading text="Vind de perfecte voetbalschool in:" type="bold" styles={[styleSheet.heroText]}/>
-        <form onSubmit={handleSubmit}>
-          <Field name="city" type="text" placeholder="Eindhoven" component={Input}/>
-        </form>
+        <Container>
+          <Heading text="Vind de perfecte voetbalschool in:" type="bold" styles={[styleSheet.heroText]}/>
+          <form onSubmit={handleSubmit}>
+            <Field styles={styleSheet.inputWidth} name="city" type="text" placeholder="Eindhoven" component={Input}/>
+          </form>
+        </Container>
       </Hero>
       <Row styles={[styleSheet.boxes]}>
         <Column breakpoints={breakpointsFirst}>

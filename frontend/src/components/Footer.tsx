@@ -7,6 +7,7 @@ import { Heading } from './Heading';
 import { withProps } from '../utils/withProps';
 import { State } from '../types';
 import { Input } from './form/Input';
+import { Container } from './Container';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
@@ -58,6 +59,9 @@ export const Footer = connect(class extends Component<typeof props> {
         textAlign: 'center',
         maxWidth: '300px',
         marginBottom: '2rem'
+      },
+      inputWidth: {
+        maxWidth: '85%'
       }
     });
 
@@ -65,17 +69,21 @@ export const Footer = connect(class extends Component<typeof props> {
       <footer>
         {location && location.pathname === '/' && (
           <div className={css(styleSheet.section, styleSheet.top)}>
-            <div className={css(styleSheet.background, styleSheet.topBackground)}/>
-            <Heading text="Jouw voetbalschool ook op ludum?" type="bold" styles={[styleSheet.heading]}/>
-            <div className={css(styleSheet.description)}>
-              Wil je jouw voetbalschool ook op ludum? Schrijf je hier in en wij nemen contact met je op!
-            </div>
-            <Input placeholder="email adres" type="email"/>
+            <Container>
+              <div className={css(styleSheet.background, styleSheet.topBackground)}/>
+              <Heading text="Jouw voetbalschool ook op ludum?" type="bold" styles={[styleSheet.heading]}/>
+              <div className={css(styleSheet.description)}>
+                Wil je jouw voetbalschool ook op ludum? Schrijf je hier in en wij nemen contact met je op!
+              </div>
+              <Input styles={[styleSheet.inputWidth] as any} placeholder="email adres" type="email"/>
+            </Container>
           </div>
         )}
         <div className={css(styleSheet.section, styleSheet.bottom)}>
-          <div className={css(styleSheet.background, styleSheet.bottomBackground)}/>
-          <Logo/>
+          <Container>
+            <div className={css(styleSheet.background, styleSheet.bottomBackground)}/>
+            <Logo/>
+          </Container>
         </div>
       </footer>
     );
