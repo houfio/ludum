@@ -18,6 +18,7 @@ import { Profile } from '../containers/Profile';
 import { content } from '../modules/content';
 import { Logout } from '../containers/Logout';
 import { Balance } from '../containers/Balance';
+import { Subscribers } from '../containers/Subscribers';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
@@ -64,6 +65,7 @@ export const Root = connect(class extends Component<typeof props> {
             <Route path="/scout" exact={true} component={Scout}/>
             <Route path="/profile" exact={true} component={Profile}/>
             <Route path="/balance" exact={true} component={Balance}/>
+            <Route path="/subscribers" exact={true} component={Subscribers}/>
           </Switch>
         </main>
         <Footer/>
