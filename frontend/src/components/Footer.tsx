@@ -62,6 +62,11 @@ export const Footer = connect(class extends Component<typeof props> {
       },
       inputWidth: {
         maxWidth: '85%'
+      },
+      center: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       }
     });
 
@@ -69,7 +74,7 @@ export const Footer = connect(class extends Component<typeof props> {
       <footer>
         {location && location.pathname === '/' && (
           <div className={css(styleSheet.section, styleSheet.top)}>
-            <Container>
+            <Container styles={[styleSheet.center]}>
               <div className={css(styleSheet.background, styleSheet.topBackground)}/>
               <Heading text="Jouw voetbalschool ook op ludum?" type="bold" styles={[styleSheet.heading]}/>
               <div className={css(styleSheet.description)}>
@@ -80,7 +85,7 @@ export const Footer = connect(class extends Component<typeof props> {
           </div>
         )}
         <div className={css(styleSheet.section, styleSheet.bottom)}>
-          <Container>
+          <Container styles={[styleSheet.center]}>
             <div className={css(styleSheet.background, styleSheet.bottomBackground)}/>
             <Logo/>
           </Container>

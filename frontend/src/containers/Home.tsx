@@ -55,6 +55,11 @@ export const Home = reduxForm<Form>({
     },
     inputWidth: {
       maxWidth: '85%'
+    },
+    center: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   });
 
@@ -75,7 +80,7 @@ export const Home = reduxForm<Form>({
   return (
     <>
       <Hero>
-        <Container>
+        <Container styles={[styleSheet.center]}>
           <Heading text="Vind de perfecte voetbalschool in:" type="bold" styles={[styleSheet.heroText]}/>
           <form onSubmit={handleSubmit}>
             <Field styles={styleSheet.inputWidth} name="city" type="text" placeholder="Eindhoven" component={Input}/>
