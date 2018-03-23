@@ -35,7 +35,7 @@ class SubscriptionController extends Controller
         /** @var AcademySubscription $subscription */
         $subscription = $subscriptionRepo->findOneBy(['id' => $args['id']]);
 
-        if (!$subscription || $user->balance < $subscription->price) {
+        if (!$subscription || $user->balance <= $subscription->price) {
             return false;
         }
 

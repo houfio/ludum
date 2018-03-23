@@ -15,17 +15,24 @@ import { Column } from '../components/Column';
 import { DESKTOP, TABLET_LANDSCAPE } from '../constants';
 import { Rating } from '../components/Rating';
 import { Button } from '../components/form/Button';
+import { createApiRequest } from '../utils/createApiRequest';
+import { auth } from '../modules/auth';
+import { push } from 'react-router-redux';
 
 type Params = {
   id: string
 }
 
 const mapStateToProps = (state: State) => ({
-  current: state.academy.current
+  current: state.academy.current,
+  token: state.auth.token,
+  user: state.auth.user
 });
 
 const getActionCreators = () => ({
+  push,
   getAcademy: academy.getAcademy,
+  getUser: auth.getUser,
   clearCurrent: academy.clearCurrent
 });
 
@@ -34,13 +41,15 @@ const { props, connect } = withProps<{}, RouteComponentProps<Params>>()(mapState
 export const Academy = connect(class extends Component<typeof props> {
   public componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    const { getAcademy } = this.props;
+    const { token } = this.props;
+    const { getAcademy,  getUser } = this.props;
 
     if (isNaN(+id)) {
       return;
     }
 
     getAcademy({ id: +id });
+    getUser({ token: token! });
   }
 
   public componentWillUnmount() {
@@ -116,7 +125,7 @@ export const Academy = connect(class extends Component<typeof props> {
                     </div>
                     <div>
                       <Heading text={`€${subscription.price} p/m`} type="bold"/>
-                      <Button text="Abonneren"/>
+                      <Button text="Abonneren" onClick={() => this.subscribe(subscription.id)}/>
                     </div>
                   </Box>
                 </Column>
@@ -126,5 +135,17 @@ export const Academy = connect(class extends Component<typeof props> {
         </Hero>
       </>
     );
+  }
+
+  public subscribe(subscriptionId: number) {
+    createApiRequest('post', 'subscription/add', { id: subscriptionId }, { token: this.props.token! }).then(result => {
+      if (!result.success) {
+        alert('Te weinig saldo!');
+
+        return;
+      }
+
+      alert('Bedankt!');
+    })
   }
 });
