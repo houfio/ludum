@@ -14,7 +14,7 @@ class PaymentController extends Controller
             ->post('payment_top_up', '/payments/top-up', 'postPaymentTopUp', true, [
                 'amount' => ['required']
             ])
-            ->post('payment_paid', '/payments/{id:number}', 'postPaymentIsPaid', true);
+            ->get('payment_paid', '/payments/{id:number}', 'getPaymentIsPaid', true);
     }
 
     public function postPaymentTopUp(array $args)
@@ -45,7 +45,7 @@ class PaymentController extends Controller
         return $payment->getPaymentUrl();
     }
 
-    public function postPaymentIsPaid(array $args, array $vars)
+    public function getPaymentIsPaid(array $args, array $vars)
     {
         $user = $this->getAuthenticatedUser();
         $mollie = $this->getPayment();

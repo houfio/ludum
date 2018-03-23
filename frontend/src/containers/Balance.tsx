@@ -79,7 +79,8 @@ export const Balance = connect(reduxForm<Form, typeof props>({
         display: 'flex',
         flexDirection: 'column',
         width: '300px',
-        maxWidth: '80%'
+        maxWidth: '80%',
+        margin: '3rem auto'
       },
       formItem: {
         width: '100%',
