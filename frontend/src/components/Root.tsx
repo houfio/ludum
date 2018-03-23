@@ -20,6 +20,7 @@ import { Logout } from '../containers/Logout';
 import { Balance } from '../containers/Balance';
 import { Subscribers } from '../containers/Subscribers';
 import { Payment } from '../containers/Payment';
+import { AcademySubs } from '../containers/AcademySubs';
 
 const mapStateToProps = (state: State) => ({
   location: state.router.location
@@ -63,6 +64,7 @@ export const Root = connect(class extends Component<typeof props> {
             <Route path="/register" exact={true} component={Register}/>
             <Route path="/search" exact={true} component={Search}/>
             <Route path="/academy/:id" exact={true} component={Academy}/>
+            <Route path="/academy/:id/subscriptions" exact={true} component={AcademySubs}/>
             <Route path="/scout" exact={true} component={Scout}/>
             <Route path="/profile" exact={true} component={Profile}/>
             <Route path="/balance" exact={true} component={Balance}/>

@@ -1,6 +1,7 @@
 import { Identifiable } from './Identifiable';
 import { Review } from './Review';
 import { Subscription } from './Subscription';
+import { Purchasable } from './Purchasable';
 
 export type Academy = Identifiable & {
   name: string,
@@ -16,5 +17,6 @@ export type Academy = Identifiable & {
   max_age?: string,
   promotion?: boolean,
   reviews: Review[],
-  subscriptions: Subscription[]
+  subscriptions: Subscription[],
+  purchasables: Purchasable[]
 };

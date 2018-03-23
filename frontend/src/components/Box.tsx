@@ -5,10 +5,11 @@ import { css, StyleSheet } from 'aphrodite/no-important';
 type Props = {
   children: ReactNode,
   styles?: (CSSProperties | false)[],
-  tag?: string
+  tag?: string,
+  flat?: boolean
 }
 
-export const Box = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
+export const Box = ({ children, styles = [], tag: Tag = 'div', flat }: Props) => {
   const styleSheet = StyleSheet.create({
     box: {
       position: 'relative',
@@ -21,6 +22,10 @@ export const Box = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
         display: 'block',
         paddingTop: '100%'
       }
+    },
+    flat: {
+      boxShadow: 'none',
+      border: '2px solid #EBEBEB'
     },
     inner: {
       position: 'absolute',
@@ -35,7 +40,7 @@ export const Box = ({ children, styles = [], tag: Tag = 'div' }: Props) => {
   });
 
   return (
-    <Tag className={css(styleSheet.box)}>
+    <Tag className={css(styleSheet.box, flat && styleSheet.flat)}>
       <div className={css(styleSheet.inner)}>
         <div className={css(styleSheet.wrapper, styles)}>
           {children}

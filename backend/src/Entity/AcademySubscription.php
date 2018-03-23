@@ -54,7 +54,14 @@ class AcademySubscription implements JsonSerializable
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'price' => $this->price
+            'price' => $this->price,
+            'subscribers' => array_map(function (UserSubscription $var) {
+                return [
+                    'id' => $var->id,
+                    'first_name' => $var->user->first_name,
+                    'last_name' => $var->user->last_name
+                ];
+            }, $this->subscriptions->toArray())
         ];
     }
 }

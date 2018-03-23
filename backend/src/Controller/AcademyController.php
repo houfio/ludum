@@ -6,6 +6,7 @@ use League\Route\Http\Exception\UnprocessableEntityException;
 use Ludum\Core\Controller;
 use Ludum\Core\RouteSet;
 use Ludum\Entity\Academy;
+use Ludum\Entity\AcademyAdmin;
 use Ludum\Entity\AcademyPosition;
 use Ludum\Entity\AcademyPromotion;
 use Ludum\Entity\AcademySubscription;
@@ -18,6 +19,7 @@ class AcademyController extends Controller
     {
         return RouteSet::create()
             ->get('academy', '/academy/{id:number}', 'getAcademy')
+            ->get('academy_subscribers', '/academy/{id:number}/subscribers', 'getAcademySubscribers', true)
             ->get('academy_search', '/academy/search', 'getSearchAcademy');
     }
 
@@ -95,5 +97,22 @@ class AcademyController extends Controller
             }, $promotions),
             $executableQuery->getResult()
         );
+    }
+
+    public function getAcademySubscribers(array $args, array $vars)
+    {
+        $user = $this->getAuthenticatedUser();
+        $academyRepo = $this->getEntityManager()->getRepository(Academy::class);
+        /** @var Academy $academy */
+        $academy = $academyRepo->findOneBy(['id' => $vars['id']]);
+        $adminRepo = $this->getEntityManager()->getRepository(AcademyAdmin::class);
+        /** @var AcademyAdmin $admin */
+        $admin = $adminRepo->findOneBy(['academy' => $academy, 'user' => $user]);
+
+        if (!$admin) {
+            return false;
+        }
+
+        return $academy->subscriptions->toArray();
     }
 }

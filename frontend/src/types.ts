@@ -6,6 +6,7 @@ import { Academy } from './api/Academy';
 import { ScoutSubscription } from './api/ScoutSubscription';
 import { User } from './api/User';
 import { Position } from './api/Position';
+import { AcademySubscription } from './api/AcademySubscribtion';
 
 export type State = {
   router: RouterState,
@@ -20,7 +21,8 @@ export type State = {
   },
   academy: {
     results: Academy[],
-    current?: Academy
+    current?: Academy,
+    subscriptions: AcademySubscription[]
   },
   subscriptions: {
     scout?: ScoutSubscription[]

@@ -14,7 +14,10 @@ class PaymentController extends Controller
             ->post('payment_top_up', '/payments/top-up', 'postPaymentTopUp', true, [
                 'amount' => ['required']
             ])
-            ->get('payment_paid', '/payments/{id:number}', 'getPaymentIsPaid', true);
+            ->get('payment_paid', '/payments/{id:number}', 'getPaymentIsPaid', true)
+            ->post('payment_decrease', '/payments/decrease', 'postDecreaseBalance', true, [
+                'amount' => ['required']
+            ]);
     }
 
     public function postPaymentTopUp(array $args)
@@ -72,5 +75,21 @@ class PaymentController extends Controller
         }
 
         return false;
+    }
+
+    public function postDecreaseBalance(array $args)
+    {
+        $user = $this->getAuthenticatedUser();
+
+        if ($args['amount'] > $user->balance) {
+            return false;
+        }
+
+        $user->balance -= $args['amount'];
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return true;
     }
 }

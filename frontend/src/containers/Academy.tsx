@@ -12,12 +12,15 @@ import { Container } from '../components/Container';
 import { Box } from '../components/Box';
 import { Row } from '../components/Row';
 import { Column } from '../components/Column';
-import { DESKTOP, TABLET_LANDSCAPE } from '../constants';
+import { BIG_DESKTOP, DESKTOP, TABLET_LANDSCAPE } from '../constants';
 import { Rating } from '../components/Rating';
 import { Button } from '../components/form/Button';
-import { createApiRequest } from '../utils/createApiRequest';
-import { auth } from '../modules/auth';
+import { Link } from '../components/Link';
 import { push } from 'react-router-redux';
+import { auth } from '../modules/auth';
+import { createApiRequest } from '../utils/createApiRequest';
+import { handle } from '../utils/handle';
+import { Purchasable } from '../api/Purchasable';
 
 type Params = {
   id: string
@@ -42,7 +45,7 @@ export const Academy = connect(class extends Component<typeof props> {
   public componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const { token } = this.props;
-    const { getAcademy,  getUser } = this.props;
+    const { getAcademy, getUser } = this.props;
 
     if (isNaN(+id)) {
       return;
@@ -83,6 +86,18 @@ export const Academy = connect(class extends Component<typeof props> {
       },
       section: {
         marginBottom: '10rem'
+      },
+      link: {
+        display: 'block',
+        marginBottom: '1rem'
+      },
+      image: {
+        height: '6rem',
+        alignSelf: 'center'
+      },
+      item: {
+        display: 'flex',
+        flexDirection: 'column'
       }
     });
 
@@ -91,13 +106,52 @@ export const Academy = connect(class extends Component<typeof props> {
         <Hero image={current.header_image}/>
         <Container styles={[styleSheet.container]}>
           <Heading text={current.name} type="bold"/>
+          <Link text="abonnees" target={`/academy/${current.id}/subscriptions`} styles={[styleSheet.link]}/>
           <span className={css(styleSheet.description)}>{current.description}</span>
         </Container>
         <Hero narrow={true} styles={[styleSheet.section]}>
           <Container>
             <Row>
+              {current.subscriptions.map(subscription => (
+                <Column key={subscription.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 4, [BIG_DESKTOP]: 3 }}>
+                  <Box styles={[styleSheet.review]}>
+                    <div>
+                      <Heading text={subscription.title} type="thin"/>
+                      {subscription.description}
+                    </div>
+                    <div>
+                      <Heading text={`€${subscription.price} p/m`} type="bold"/>
+                      <Button text="abonneren" onClick={handle(this.subscribe, subscription.id)}/>
+                    </div>
+                  </Box>
+                </Column>
+              ))}
+            </Row>
+          </Container>
+        </Hero>
+        <Container styles={[styleSheet.section]}>
+          <Row>
+            {current.purchasables.map(purchasable => (
+              <Column key={purchasable.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 4, [BIG_DESKTOP]: 3 }}>
+                <Box styles={[styleSheet.review]} flat={true}>
+                  <div className={css(styleSheet.item)}>
+                    <Heading text={purchasable.title} type="thin"/>
+                    <img src={purchasable.image} className={css(styleSheet.image)}/>
+                  </div>
+                  <div>
+                    <Heading text={`€${purchasable.price}`} type="bold"/>
+                    <Button text="kopen" onClick={handle(this.buy, purchasable)}/>
+                  </div>
+                </Box>
+              </Column>
+            ))}
+          </Row>
+        </Container>
+        <Hero inverse={true} narrow={true} styles={[styleSheet.section]}>
+          <Container>
+            <Row>
               {current.reviews.map(review => (
-                <Column key={review.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 3 }}>
+                <Column key={review.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 4, [BIG_DESKTOP]: 3 }}>
                   <Box styles={[styleSheet.review]}>
                     <div>
                       <Heading text={review.title} type="thin"/>
@@ -113,32 +167,18 @@ export const Academy = connect(class extends Component<typeof props> {
             </Row>
           </Container>
         </Hero>
-        <Hero inverse={true} narrow={true} styles={[styleSheet.section]}>
-          <Container>
-            <Row>
-              {current.subscriptions.map(subscription => (
-                <Column key={subscription.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 3 }}>
-                  <Box styles={[styleSheet.review]}>
-                    <div>
-                      <Heading text={subscription.title} type="thin"/>
-                      {subscription.description}
-                    </div>
-                    <div>
-                      <Heading text={`€${subscription.price} p/m`} type="bold"/>
-                      <Button text="Abonneren" onClick={() => this.subscribe(subscription.id)}/>
-                    </div>
-                  </Box>
-                </Column>
-              ))}
-            </Row>
-          </Container>
-        </Hero>
       </>
     );
   }
 
-  public subscribe(subscriptionId: number) {
-    createApiRequest('post', 'subscription/add', { id: subscriptionId }, { token: this.props.token! }).then(result => {
+  private subscribe = (subscriptionId: number) => {
+    const { token } = this.props;
+
+    if (!token) {
+      return;
+    }
+
+    createApiRequest('post', 'subscription/add', { id: subscriptionId }, { token }).then(result => {
       if (!result.success) {
         alert('Te weinig saldo!');
 
@@ -146,6 +186,24 @@ export const Academy = connect(class extends Component<typeof props> {
       }
 
       alert('Bedankt!');
-    })
-  }
+    });
+  };
+
+  private buy = (item: Purchasable) => {
+    const { token } = this.props;
+
+    if (!token) {
+      return;
+    }
+
+    createApiRequest('post', 'payments/decrease', { amount: item.price }, { token }).then(result => {
+      if (!result.success) {
+        alert('Te weinig saldo!');
+
+        return;
+      }
+
+      alert('Bedankt!');
+    });
+  };
 });

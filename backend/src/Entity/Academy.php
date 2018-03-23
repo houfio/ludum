@@ -151,7 +151,15 @@ class Academy implements JsonSerializable
             'creation_date' => $this->creation_date->format('Y-m-d H:i'),
             'stars' => $stars,
             'reviews' => $this->reviews->toArray(),
-            'subscriptions' => $this->subscriptions->toArray()
+            'subscriptions' => array_map(function ($var) {
+                return [
+                    'id' => $var->id,
+                    'title' => $var->title,
+                    'description' => $var->description,
+                    'price' => $var->price
+                ];
+            }, $this->subscriptions->toArray()),
+            'purchasables' => $this->purchasables->toArray()
         ];
     }
 }

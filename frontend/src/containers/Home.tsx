@@ -94,15 +94,15 @@ export const Home = reduxForm<Form>({
         <Column breakpoints={breakpointsFirst}>
           <Box styles={[styleSheet.box]}>
             <img src="/img/certificate.svg" className={css(styleSheet.boxImage)}/>
-            <Heading text="Verbetering" type="thin"/>
-            <p>Ik heb geen idee wat ik hier neer moet zetten</p>
+            <Heading text="verbetering" type="thin"/>
+            <p>Goede lessen en een leuk team zorgen ervoor dat u in alle aspecten verbeterd.</p>
           </Box>
         </Column>
         <Column breakpoints={breakpointsSecond}>
           <Box styles={[styleSheet.box]}>
             <img src="/img/medal.svg" className={css(styleSheet.boxImage)}/>
-            <Heading text="Snel & Vertrouwd" type="thin"/>
-            <p>Hallo dokter, wat kan ik doen aan crippling depression?</p>
+            <Heading text="snel & vertrouwd" type="thin"/>
+            <p>Snelle service en een grote community dragen bij aan een goede keuze.</p>
           </Box>
         </Column>
       </Row>
@@ -116,7 +116,7 @@ export const Home = reduxForm<Form>({
           <div className={css(styleSheet.promoImage)}>
             <Heading text="De beste voetbalscholen" type="bold"/>
             <p>Alle type voetbalscholen &amp; academies snel geindexeerd voor jouw gemak</p>
-            <Button text="Bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
+            <Button text="bekijk alle scholen" type="primary" styles={[styleSheet.promoButton]}/>
           </div>
         </Column>
         <Column breakpoints={breakpointsFirst} styles={[styleSheet.promoText]}>
@@ -142,9 +142,9 @@ export const Home = reduxForm<Form>({
         <Column breakpoints={breakpointsSecond} styles={[styleSheet.promoText]}>
           <div className={css(styleSheet.promoImage)}>
             <Heading text="Perfect voor scouts" type="bold"/>
-            <p>Hier mogen wij het eigenlijk niet over hebben, want het is best raar eigenlijk.</p>
+            <p>Scouts krijgen de mogenlijkheid om de allerbeste deelnemers te recruiten.</p>
             <Button
-              text="Zie de mogelijkheden"
+              text="zie de mogelijkheden"
               type="primary"
               styles={[styleSheet.promoButton]}
             />

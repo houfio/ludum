@@ -4,12 +4,15 @@ import { createModule } from '../utils/createModule';
 import { createApiRequest } from '../utils/createApiRequest';
 import { Academy } from '../api/Academy';
 import { Identifiable } from '../api/Identifiable';
+import { AcademySubscription } from '../api/AcademySubscribtion';
+import { Token } from '../types';
 
 export const academy = createModule(
   'academy',
   {
     results: [],
-    current: undefined
+    current: undefined,
+    subscriptions: []
   },
   createAction => ({
     searchAcademies: createAction<{
@@ -45,6 +48,22 @@ export const academy = createModule(
       payload => payload,
       () => ({
         current: undefined
+      })
+    ),
+    getAcademySubscriptions: createAction<Identifiable & Token>('GET_ACADEMY_SUBSCRIBERS')(
+      payload => ({
+        promise:
+          createApiRequest<AcademySubscription[]>('get', `academy/${payload.id}/subscribers`, undefined, payload),
+        queue: 'load'
+      }),
+      action => ({
+        subscriptions: action.data
+      })
+    ),
+    clearAcademySubscriptions: createAction('CLEAR_ACADEMY_SUBSCRIPTIONS')(
+      payload => payload,
+      () => ({
+        subscriptions: []
       })
     )
   })
