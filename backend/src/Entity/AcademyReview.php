@@ -62,7 +62,9 @@ class AcademyReview implements JsonSerializable
             'stars' => $this->stars,
             'title' => $this->title,
             'review' => $this->review,
-            'creation_date' => $this->creation_date->format('Y-m-d H:i')
+            'creation_date' => $this->creation_date->format('Y-m-d H:i'),
+            'first_name' => $this->user->first_name,
+            'last_name' => $this->user->last_name
         ];
     }
 }

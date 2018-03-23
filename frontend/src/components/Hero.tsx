@@ -7,6 +7,7 @@ import { content } from '../modules/content';
 
 type Props = {
   children?: ReactNode,
+  narrow?: boolean,
   image?: string,
   inverse?: boolean,
   styles?: (CSSProperties | false)[],
@@ -24,17 +25,22 @@ export const Hero = connect(class extends Component<typeof props> {
     const { image } = this.props;
     const { setGhostNav } = this.props;
 
-    setGhostNav({ ghost: Boolean(image) });
+    if (image) {
+      setGhostNav({ ghost: true });
+    }
   }
 
   public componentWillUnmount() {
+    const { image } = this.props;
     const { setGhostNav } = this.props;
 
-    setGhostNav({ ghost: false });
+    if (image) {
+      setGhostNav({ ghost: false });
+    }
   }
 
   public render() {
-    const { children, image, inverse, styles = [], tag: Tag = 'div' } = this.props;
+    const { children, narrow, image, inverse, styles = [], tag: Tag = 'div' } = this.props;
 
     const styleSheet = StyleSheet.create({
       hero: {
@@ -44,6 +50,10 @@ export const Hero = connect(class extends Component<typeof props> {
         alignItems: 'center',
         padding: '9rem 0 16rem 0',
         color: '#FFFFFF'
+      },
+      narrow: {
+        padding: '0',
+        marginBottom: '6rem'
       },
       heroBackground: {
         position: 'absolute',
@@ -58,6 +68,9 @@ export const Hero = connect(class extends Component<typeof props> {
         transformOrigin: `center ${inverse ? 'right' : 'left'}`,
         zIndex: -1,
         overflow: 'hidden'
+      },
+      heroBackgroundNarrow: {
+        transformOrigin: `center ${inverse ? 'left' : 'right'}`
       },
       topHero: {
         position: 'absolute',
@@ -76,11 +89,17 @@ export const Hero = connect(class extends Component<typeof props> {
       <Tag
         className={css(
           styleSheet.hero,
+          narrow && styleSheet.narrow,
           Boolean(image) && styleSheet.topHero,
           styles
         )}
       >
-        <div className={css(styleSheet.heroBackground)}>
+        <div
+          className={css(
+            styleSheet.heroBackground,
+            narrow && styleSheet.heroBackgroundNarrow
+          )}
+        >
           {image && (
             <img src={image} className={css(styleSheet.backgroundImage)}/>
           )}

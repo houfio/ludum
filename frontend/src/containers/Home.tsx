@@ -35,7 +35,7 @@ export const Home = reduxForm<Form>({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'space-between',
-      height: 'calc(100% - 4rem)'
+      height: '100%'
     },
     boxImage: {
       height: '7rem'
@@ -54,12 +54,15 @@ export const Home = reduxForm<Form>({
       margin: '4rem'
     },
     inputWidth: {
-      maxWidth: '85%'
+      maxWidth: '100%'
     },
     center: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
+    },
+    form: {
+      maxWidth: '85%'
     }
   });
 
@@ -82,7 +85,7 @@ export const Home = reduxForm<Form>({
       <Hero>
         <Container styles={[styleSheet.center]}>
           <Heading text="Vind de perfecte voetbalschool in:" type="bold" styles={[styleSheet.heroText]}/>
-          <form onSubmit={handleSubmit}>
+          <form className={css(styleSheet.form)} onSubmit={handleSubmit}>
             <Field styles={styleSheet.inputWidth} name="city" type="text" placeholder="Eindhoven" component={Input}/>
           </form>
         </Container>

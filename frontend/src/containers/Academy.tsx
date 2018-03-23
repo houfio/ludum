@@ -9,6 +9,12 @@ import { academy } from '../modules/academy';
 import { Hero } from '../components/Hero';
 import { Heading } from '../components/Heading';
 import { Container } from '../components/Container';
+import { Box } from '../components/Box';
+import { Row } from '../components/Row';
+import { Column } from '../components/Column';
+import { DESKTOP, TABLET_LANDSCAPE } from '../constants';
+import { Rating } from '../components/Rating';
+import { Button } from '../components/form/Button';
 
 type Params = {
   id: string
@@ -58,6 +64,16 @@ export const Academy = connect(class extends Component<typeof props> {
       description: {
         display: 'block',
         maxWidth: '600px'
+      },
+      review: {
+        color: '#000000',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%'
+      },
+      section: {
+        marginBottom: '10rem'
       }
     });
 
@@ -68,6 +84,46 @@ export const Academy = connect(class extends Component<typeof props> {
           <Heading text={current.name} type="bold"/>
           <span className={css(styleSheet.description)}>{current.description}</span>
         </Container>
+        <Hero narrow={true} styles={[styleSheet.section]}>
+          <Container>
+            <Row>
+              {current.reviews.map(review => (
+                <Column key={review.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 3 }}>
+                  <Box styles={[styleSheet.review]}>
+                    <div>
+                      <Heading text={review.title} type="thin"/>
+                      {review.review}
+                    </div>
+                    <div>
+                      {review.first_name} {review.last_name}
+                      <Rating rating={review.stars}/>
+                    </div>
+                  </Box>
+                </Column>
+              ))}
+            </Row>
+          </Container>
+        </Hero>
+        <Hero inverse={true} narrow={true} styles={[styleSheet.section]}>
+          <Container>
+            <Row>
+              {current.subscriptions.map(subscription => (
+                <Column key={subscription.id} breakpoints={{ [TABLET_LANDSCAPE]: 6, [DESKTOP]: 3 }}>
+                  <Box styles={[styleSheet.review]}>
+                    <div>
+                      <Heading text={subscription.title} type="thin"/>
+                      {subscription.description}
+                    </div>
+                    <div>
+                      <Heading text={`€${subscription.price} p/m`} type="bold"/>
+                      <Button text="Abonneren"/>
+                    </div>
+                  </Box>
+                </Column>
+              ))}
+            </Row>
+          </Container>
+        </Hero>
       </>
     );
   }

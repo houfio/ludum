@@ -149,7 +149,9 @@ class Academy implements JsonSerializable
             'city' => $this->city,
             'building_number' => $this->building_number,
             'creation_date' => $this->creation_date->format('Y-m-d H:i'),
-            'stars' => $stars
+            'stars' => $stars,
+            'reviews' => $this->reviews->toArray(),
+            'subscriptions' => $this->subscriptions->toArray()
         ];
     }
 }

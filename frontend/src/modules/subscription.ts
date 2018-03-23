@@ -10,7 +10,7 @@ export const subscriptions = createModule(
   createAction => ({
     getScoutSubscriptions: createAction('GET_SCOUT_SUBSCRIPTIONS')(
       () => ({
-        promise: createApiRequest<ScoutSubscription[]>('get', 'subscriptions/scout'),
+        promise: createApiRequest<ScoutSubscription[]>('get', 'subscription/scout'),
         queue: 'load'
       }),
       action => ({
