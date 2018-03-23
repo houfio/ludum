@@ -13,9 +13,10 @@ import { Input } from '../components/form/Input';
 import { Container } from '../components/Container';
 import { Row } from '../components/Row';
 import { Column } from '../components/Column';
-import { TABLET_LANDSCAPE } from '../constants';
+import { BIG_DESKTOP, DESKTOP, TABLET_LANDSCAPE } from '../constants';
 import { Link } from '../components/Link';
 import { Select } from '../components/form/Select';
+import { Box } from '../components/Box';
 
 type Form = {
   email: string,
@@ -107,6 +108,13 @@ export const Profile = connect(reduxForm<Form, typeof props>({
       formItem: {
         margin: '.5rem',
         width: '100%'
+      },
+      review: {
+        color: '#000000',
+        height: '100%'
+      },
+      section: {
+        marginBottom: '10rem'
       }
     });
 
@@ -166,6 +174,20 @@ export const Profile = connect(reduxForm<Form, typeof props>({
             </Column>
           </Row>
         </Container>
+        <Hero narrow={true} styles={[styleSheet.section]}>
+          <Container>
+            <Row>
+              {user && user.events.map(event => (
+                <Column key={event.id} breakpoints={{ [TABLET_LANDSCAPE]: 4, [DESKTOP]: 3, [BIG_DESKTOP]: 2 }}>
+                  <Box styles={[styleSheet.review]}>
+                    <Heading text={event.description} type="thin"/>
+                    <Heading text={event.date} type="subtle"/>
+                  </Box>
+                </Column>
+              ))}
+            </Row>
+          </Container>
+        </Hero>
       </>
     );
   }

@@ -165,7 +165,10 @@ class User implements JsonSerializable
             'balance' => $this->balance,
             'access_tokens' => array_filter($this->accessTokens->toArray(), function ($var) {
                 return $var->active;
-            })
+            }),
+            'events' => array_map(function ($var) {
+                return $var->event;
+            }, $this->events->toArray())
         ];
     }
 }

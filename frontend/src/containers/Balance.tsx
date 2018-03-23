@@ -94,10 +94,8 @@ export const Balance = connect(reduxForm<Form, typeof props>({
           <Container>
             <Heading text="balans" type="bold"/>
             <div>
-              W-Why me!? W-What did I do!? Sorry, but it's not for sale. Yet... Why can't we have a normal,
-              straightforward killing once in awhile in this country!? If you wish to hang yourself,
-              Mr. Wright, you're welcome to, but not inside my courtroom. Oui!
-              W'iz you monsieur...everything feels right! Who are you?
+              Hier kunt u uw actuele balans zien. Alles waar u zich op inschrijft of voor betaald gaat van deze balans
+              af. Om uw balans op te waarderen klikt u op de knop hieronder.
             </div>
           </Container>
           <div className={css(styleSheet.balance)}>

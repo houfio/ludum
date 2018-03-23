@@ -1,5 +1,6 @@
 import { Identifiable } from './Identifiable';
 import { AccessToken } from './AccessToken';
+import { Event } from './Event';
 
 export type User = Identifiable & {
   first_name: string,
@@ -15,5 +16,6 @@ export type User = Identifiable & {
   avatar?: string,
   creation_date: string,
   balance: number,
-  access_tokens: AccessToken[]
+  access_tokens: AccessToken[],
+  events: Event[]
 };

@@ -49,7 +49,7 @@ class AcademyEvent implements JsonSerializable
         return [
             'id' => $this->id,
             'description' => $this->description,
-            'date' => $this->date
+            'date' => $this->date->format('Y-m-d H:i')
         ];
     }
 }
